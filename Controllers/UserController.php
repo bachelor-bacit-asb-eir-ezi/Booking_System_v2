@@ -1,8 +1,9 @@
 <?php 
+    session_start();
+
     require(__DIR__ . "/../Tools/Validate.php");
     require(__DIR__ . "/../Tools/dbcon.php");
 
-    session_start();
 
     if(isset($_POST["logIn"])){
 

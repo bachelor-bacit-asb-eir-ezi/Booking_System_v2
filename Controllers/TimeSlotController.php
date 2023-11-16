@@ -1,9 +1,9 @@
 <?php
+session_start();
+
 require_once(__DIR__ . "/../Models/TimeSlot.php");
 require_once(__DIR__ . "/../Models/Week.php");
 require_once(__DIR__ . "/../Tools/Validate.php");
-
-session_start();
 
 #Calender endre uke
 if(isset($_POST["changeWeek"])){
@@ -69,5 +69,20 @@ if (isset($_POST["createTimeSlot"])){
     unset($timeSlot);
     header("location: calender.php");
     exit;
+}
+
+#Show info om time slot
+if (isset($_GET["showTimeSlotInfo"])){
+    header("location: show.php");
+    exit;
+}
+
+#Book og unbook timeslot
+if (isset($_POST["bookTimeSlot"])){
+    TimeSlot::bookTimeSlot($_POST["timeSlotId"], $_SESSION["user"]["id"]);
+}
+
+if (isset($_POST["unBookTimeSlot"])){
+    TimeSlot::unBookTimeSlot($_POST["timeSlotId"]);
 }
 ?>

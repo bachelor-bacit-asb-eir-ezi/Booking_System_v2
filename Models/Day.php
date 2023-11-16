@@ -21,6 +21,7 @@ class Day
         $this->dayName = $dayName;
         $this->date = $date;
         $this->timeArray = $this->fillTimeArray();
+        //$this -> timeArray = array(); //skal teste bedre måte å vise time slots på
       }
     
       #Fyller timeArray med key/value pair der key er klokkeslett og value er null

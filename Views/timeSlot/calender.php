@@ -1,7 +1,11 @@
 <?php include(__DIR__ . "/../layout/header.php")?>
 <?php
-    require_once(__DIR__ . "/../../Controllers/TimeSlotController.php");
-    #Legg inn logIn sjekk her
+    require(__DIR__ . "/../../Controllers/TimeSlotController.php");
+    
+    if (!$_SESSION["user"]["logedIn"]){
+        header("location: ../startPage.php");
+        exit;
+    }
 
     global $week;
 
@@ -30,13 +34,13 @@
     echo "<div id='calender'>";
         echo "<div class='calendercolumn'>";
         echo "<div class='day'></div>";
-            for ($i = 7; $i < 24; $i++){
+            /*for ($i = 7; $i < 24; $i++){
                 if ($i < 10){
                     echo "<div class='time'>0$i:00</div>";
                 } else {
                     echo "<div class='time'>$i:00</div>";
                 }
-            }
+            }*/
         echo "</div>";
         foreach ($week -> getDaysInWeek() as $day){
             echo "<div class='calenderColumn'>";
@@ -58,29 +62,29 @@
                         }else{ #Ledig time
                             echo "<div id='" . $time[0] -> timeslot_id . "' class='timeSlotStyle timeSlot availebleTimeSlot'>";
                         }
-                        echo "<form method='GET' action='/displayTimeSlot' id='" . $time[0] -> timeslot_id . "timeSlotForm'>";
+                        echo "<form method='GET' action='show.php?timeslotId=". $time[0] -> timeslot_id . "' id='" . $time[0] -> timeslot_id . "timeSlotForm'>";
                             echo "<input type='hidden' name='timeSlotId' value='" . $time[0] -> timeslot_id . "'>";
                         echo "</form>";
                         break;
                     default:
                         #flere veiledningstimer
                         echo "<div class='timeSlotStyle multipleTimeSlot'>";
-                            echo "<form method='GET' action='/displayTimeSlot'>";
-                            echo "<select name='timeSlotId'>";
-                        foreach ($time as $timeSlot){
-                            if ($timeSlot -> booked_by != null){  # Booket time 
-                                echo "<option class='occupiedTimeSlot' value='".$timeSlot -> timeslot_id ."'>";
-                            }else{ #Ledig time
-                                echo "<option class='availebleTimeSlot' value='". $timeSlot -> timeslot_id . "'>";
+                        echo "<form method='GET'>";
+                        echo "<select name='timeSlotId'>";
+                        foreach ($time as $timeSlot) {
+                            if ($timeSlot->booked_by !== null) {  # Booket time 
+                                echo "<option class='occupiedTimeSlot' value='" . $timeSlot->timeslot_id . "'>";
+                            } else { #Ledig time
+                                echo "<option class='availebleTimeSlot' value='" . $timeSlot->timeslot_id . "'>";
                             }
-                                    echo $timeSlot -> tutor_id . ":" . $timeSlot -> description . "</option>";
+                            echo $timeSlot->tutor_id . ":" . $timeSlot->description . "</option>";
                         }
                         echo "</select>
-                            <input type='submit' value='Vis valgte'>
+                            <input type='submit' name='showTimeSlotInfo' value='Vis valgte'>
                             </form>";
                         break;
                     }
-                       echo "</div>";
+                    echo "</div>";
             }
         echo "</div>";
         }
