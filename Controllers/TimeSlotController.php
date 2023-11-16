@@ -80,9 +80,13 @@ if (isset($_GET["showTimeSlotInfo"])){
 #Book og unbook timeslot
 if (isset($_POST["bookTimeSlot"])){
     TimeSlot::bookTimeSlot($_POST["timeSlotId"], $_SESSION["user"]["id"]);
+    header("location: ../timeSlot/calender.php");
+    exit;
 }
 
 if (isset($_POST["unBookTimeSlot"])){
     TimeSlot::unBookTimeSlot($_POST["timeSlotId"]);
+    header("location: ../timeSlot/calender.php");
+    exit;
 }
 ?>

@@ -64,7 +64,7 @@ class Week
     }
 
     #plasserer timeslots inne i alle dagene assosiert med uken
-    public function insertTimeSlots($timeSlots){
+    /*public function insertTimeSlots($timeSlots){
         foreach($timeSlots as $timeSlot){
             //$timeSlotTime = $timeSlot -> start_time;
 
@@ -77,6 +77,16 @@ class Week
             $day = $this -> getDayInWeekByDate($timeSlotDate);
             if(!$day == null){
                 array_push($day -> timeArray[$modifiedTime], $timeSlot);
+            }
+        }
+    }*/
+
+    public function insertTimeSlots($timeSlots){
+        foreach($timeSlots as $timeSlot){
+            $timeSlotDate = $timeSlot -> date;
+            $day = $this -> getDayInWeekByDate($timeSlotDate);
+            if(!$day == null){
+                array_push($day -> timeArray, $timeSlot);
             }
         }
     }

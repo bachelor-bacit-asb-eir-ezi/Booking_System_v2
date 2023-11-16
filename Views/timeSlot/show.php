@@ -39,12 +39,12 @@ echo "<div>
     }
     echo "</form>";
 
-    if($timeSlot -> booked_by == null){
+    if($timeSlot -> booked_by === null){
         echo "<form method='POST'>";
             echo "<input name='timeSlotId' type='hidden' value='" . $timeSlot -> timeslot_id . "'>";
             echo "<input type='submit' name='bookTimeSlot' value='Book veilednings time'>";
         echo "</form>";
-    }elseif($_SESSION["user"]["id"] == $timeSlot -> booked_by ){
+    }else{
         echo "<form method='POST'>";
             echo "<input name='timeSlotId' type='hidden' value='" . $timeSlot -> timeslot_id . "'>";
             echo "<input type='submit' name='unBookTimeSlot' value='Unbook veilednings time'>";

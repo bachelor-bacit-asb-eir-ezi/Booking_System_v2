@@ -32,69 +32,39 @@
     echo "</form>";
     echo "</div>";
     echo "<div id='calender'>";
-        echo "<div class='calendercolumn'>";
-        echo "<div class='day'></div>";
-            /*for ($i = 7; $i < 24; $i++){
-                if ($i < 10){
-                    echo "<div class='time'>0$i:00</div>";
-                } else {
-                    echo "<div class='time'>$i:00</div>";
-                }
-            }*/
-        echo "</div>";
         foreach ($week -> getDaysInWeek() as $day){
+            $dateDay = DateTime::createFromFormat("Y-m-d", $day -> getDate());
+            $formatedDate = $dateDay->format("d-m-Y");
+
             echo "<div class='calenderColumn'>";
-            echo "<div class='day'> ";
-            echo $day -> getDayName() . "<br>";
-            echo $day -> getDate() ."<br>";
-            echo "</div>";
-            foreach($day -> timeArray as $time){
-                #sjekker om flere veildeningstimer i samme time og dag, eller tom-
-                switch (count($time)){
-                    case (0):
-                        # Tom time
-                        echo "<div class='timeSlotStyle'>";
-                        break;
-                    case (1):
-                        # En veiledningstime -->
-                        if ($time[0] -> booked_by != null) {# Booket time
-                            echo "<div id='" . $time[0] -> timeslot_id . "' class='timeSlotStyle timeSlot occupiedTimeSlot'>";
-                        }else{ #Ledig time
-                            echo "<div id='" . $time[0] -> timeslot_id . "' class='timeSlotStyle timeSlot availebleTimeSlot'>";
-                        }
-                        echo "<form method='GET' action='show.php?timeslotId=". $time[0] -> timeslot_id . "' id='" . $time[0] -> timeslot_id . "timeSlotForm'>";
-                            echo "<input type='hidden' name='timeSlotId' value='" . $time[0] -> timeslot_id . "'>";
+            echo "<div class='cell'>" . $day -> getDayName() . "<br>" . $formatedDate . "</div>";
+
+            $timeSlots = $day -> timeArray;
+
+            foreach ($timeSlots as $timeSlot){
+                $time = DateTime::createFromFormat("H:i:s" , $timeSlot -> start_time);
+                $formatedTime = $time->format("H:i");
+                if ($timeSlot -> booked_by === null){
+                    echo "<div class='timeSlotStyle availebleTimeSlot cell'>" . $formatedTime . "<br>" . $timeSlot -> tutor_name;
+                        echo "<form method='GET' action='show.php?timeslotId=". $timeSlot -> timeslot_id . 
+                                "' id='" . $timeSlot -> timeslot_id . "timeSlotForm'>";
+                            echo "<input type='hidden' name='timeSlotId' value='" . $timeSlot -> timeslot_id . "'>";
+                            echo "<input type='submit' name='getTimeSlotInfo' value='Vis'>";
                         echo "</form>";
-                        break;
-                    default:
-                        #flere veiledningstimer
-                        echo "<div class='timeSlotStyle multipleTimeSlot'>";
-                        echo "<form method='GET'>";
-                        echo "<select name='timeSlotId'>";
-                        foreach ($time as $timeSlot) {
-                            if ($timeSlot->booked_by !== null) {  # Booket time 
-                                echo "<option class='occupiedTimeSlot' value='" . $timeSlot->timeslot_id . "'>";
-                            } else { #Ledig time
-                                echo "<option class='availebleTimeSlot' value='" . $timeSlot->timeslot_id . "'>";
-                            }
-                            echo $timeSlot->tutor_id . ":" . $timeSlot->description . "</option>";
-                        }
-                        echo "</select>
-                            <input type='submit' name='showTimeSlotInfo' value='Vis valgte'>
-                            </form>";
-                        break;
-                    }
-                    echo "</div>";
+                    echo "</div>"; 
+                } else {
+                    echo "<div class='timeSlotStyle occupiedTimeSlot cell'>" . $formatedTime . "<br>" . $timeSlot -> tutor_name;
+                        echo "<form method='GET' action='show.php?timeslotId=". $timeSlot -> timeslot_id . 
+                                "' id='" . $timeSlot -> timeslot_id . "timeSlotForm'>";
+                            echo "<input type='hidden' name='timeSlotId' value='" . $timeSlot -> timeslot_id . "'>";
+                            echo "<input type='submit' name='getTimeSlotInfo' value='Vis'>";
+                        echo "</form>";
+                    echo "</div>"; 
+                }
             }
         echo "</div>";
         }
     echo "</div>";
 ?>
-<script>
-    //Gjør timeSlot i kalender klikkbare
-    $('.timeSlot').click(function(){
-        $('#' +this.id+'timeSlotForm').submit();
-    });
-</script>
 
 <?php include(__DIR__ . "/../layout/footer.php")?>
