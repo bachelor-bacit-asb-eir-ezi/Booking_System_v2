@@ -1,8 +1,11 @@
 <?php
+require_once(__DIR__ . "/../Models/TimeSlot.php");
+require_once(__DIR__ . "/../Models/Week.php");
+require_once(__DIR__ . "/../Tools/Validate.php");
+
 session_start();
 
-require_once(__DIR__ . '/../Models/TimeSlot.php');
-
+#Calender endre uke
 if(isset($_POST["changeWeek"])){
     $year =  $_POST["currentYear"];
     switch ($_POST["typeOfChange"]) {
@@ -48,5 +51,23 @@ if(isset($_POST["changeWeek"])){
     $timeSlots = TimeSlot::getTimeSlots($weekNumber);
     $week -> insertTimeSlots($timeSlots);
 }
-//Fjerne request for det er noe laravel greier
+
+#Create Timeslot
+if (isset($_POST["createTimeSlot"])){
+    $timeSlot = new TimeSlot();
+
+    $timeSlot -> tutorId = $_SESSION["user"]["id"];
+
+    $timeSlot -> date = Validate::sanitize($_POST["date"]);
+    $timeSlot -> startTime = Validate::sanitize($_POST["startTime"]);
+    $timeSlot -> endTime = date('h:i:s', strtotime($timeSlot -> startTime)+3600);
+    $timeSlot -> location = Validate::sanitize($_POST["location"]);
+    $timeSlot -> description = Validate::sanitize($_POST["description"]);
+
+    TimeSlot::saveTimeSlot($timeSlot);
+
+    unset($timeSlot);
+    header("location: calender.php");
+    exit;
+}
 ?>

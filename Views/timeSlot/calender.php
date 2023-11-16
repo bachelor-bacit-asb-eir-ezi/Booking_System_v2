@@ -1,8 +1,6 @@
-<?php include "../layout/header.php"?>
+<?php include(__DIR__ . "/../layout/header.php")?>
 <?php
-    require "../../models/week.php";
-    require "../../controllers/TimeSlotController.php";
-
+    require_once(__DIR__ . "/../../Controllers/TimeSlotController.php");
     #Legg inn logIn sjekk her
 
     global $week;
@@ -95,4 +93,4 @@
     });
 </script>
 
-<?php include '../layout/footer.php'?>
+<?php include(__DIR__ . "/../layout/footer.php")?>

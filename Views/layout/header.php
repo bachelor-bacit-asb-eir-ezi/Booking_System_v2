@@ -24,13 +24,13 @@
     <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav">
             <li class="nav-item active">
-                <a class="nav-link" href="/">Hjem</a>
+                <a class="nav-link" href="../user/home.php">Hjem</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/timeslot">Tidsluker</a>
+                <a class="nav-link" href="../timeSlot/calender.php">Tidsluker</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/createTimeSlot">Opprett tid</a>
+                <a class="nav-link" href="../timeSlot/create.php">Opprett tid</a>
             </li>
 
         </ul>

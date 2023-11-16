@@ -1,13 +1,13 @@
 <?php 
-    require "../tools/validate.php";
-    require "../tools/dbcon.php";
+    require(__DIR__ . "/../Tools/Validate.php");
+    require(__DIR__ . "/../Tools/dbcon.php");
 
     session_start();
 
     if(isset($_POST["logIn"])){
 
-        $email = Validate::sanetize($_POST["email"]);
-        $password = Validate::sanetize($_POST["password"]);
+        $email = Validate::sanitize($_POST["email"]);
+        $password = Validate::sanitize($_POST["password"]);
 
         $sql = "SELECT users.id, users.name, email, phone_number, users.password FROM users WHERE email = :email";
 
@@ -25,14 +25,14 @@
         $user = $sp -> fetch(PDO::FETCH_OBJ);
 
         if(!$user == null && password_verify($password, $user -> password)){
+            $_SESSION['user']['id'] = $user -> id;
             $_SESSION['user']['email'] = $user -> email;
-            $_SESSION['user']['userId'] = $user -> user_id;
             $_SESSION['user']['name'] = $user -> name;
             $_SESSION['user']['phone'] = $user -> phone_number;
             //$_SESSION['user']['role'] = cheackUserRole($user -> user_id, $pdo);
             $_SESSION['user']['logedIn'] = true;
             
-            header("Location: ../Views/home.php");
+            header("Location: ../Views/user/home.php");
             exit();
         } else {
             echo "Feil brukernavn eller passord";
@@ -42,9 +42,10 @@
     if(isset($_REQUEST["logOut"])){
         unset($_SESSION["user"]);
         session_destroy();
+
         session_start();
         $_SESSION['logOutMsg'] = "Du er nå logget ut";
-        header("location: ../Views/startPage.php");
+        header("location: ../startPage.php");
         exit;
     }
 ?>

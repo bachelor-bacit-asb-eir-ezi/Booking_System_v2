@@ -7,7 +7,7 @@
 </head>
 <body>
     <?php 
-        require "../controllers/userController.php";
+        require(__DIR__ . "/../Controllers/UserController.php");
 
         #Hvis session med logOutMsg eksisterer: fjern den men lagre melding i variabel
         if (isset($_SESSION["logOutMsg"])) {
