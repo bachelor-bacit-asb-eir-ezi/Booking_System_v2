@@ -35,7 +35,7 @@
             $_SESSION['user']['role'] = $user -> role_name;
             $_SESSION['user']['logedIn'] = true;
             
-            header("Location: ../Views/user/home.php");
+            header("Location: ../Views/timeSlot/calender.php");
             exit();
         } else {
             echo "Feil brukernavn eller passord";
