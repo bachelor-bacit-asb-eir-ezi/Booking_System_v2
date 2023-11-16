@@ -2,6 +2,12 @@
 
 <?php 
     require_once(__DIR__ . "/../../Controllers/TimeSlotController.php");
+
+    if ($_SESSION["user"]["role"] !== "tutor"){
+        $_SESSION["msg"] = "Du har ikke tilgang til den siden";
+        header("location: ../user/home.php");
+        exit;
+    }
 ?>
 
 <form method="POST">
