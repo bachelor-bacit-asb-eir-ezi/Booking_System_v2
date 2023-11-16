@@ -10,7 +10,9 @@
         $email = Validate::sanitize($_POST["email"]);
         $password = Validate::sanitize($_POST["password"]);
 
-        $sql = "SELECT users.id, users.name, email, phone_number, users.password FROM users WHERE email = :email";
+        $sql = "SELECT users.id, users.name, email, phone_number, users.password, role_name 
+        FROM users 
+        INNER JOIN roles ON users.role_id = roles.role_id  WHERE email = :email";
 
         $sp = $pdo -> prepare($sql);
 
@@ -30,7 +32,7 @@
             $_SESSION['user']['email'] = $user -> email;
             $_SESSION['user']['name'] = $user -> name;
             $_SESSION['user']['phone'] = $user -> phone_number;
-            //$_SESSION['user']['role'] = cheackUserRole($user -> user_id, $pdo);
+            $_SESSION['user']['role'] = $user -> role_name;
             $_SESSION['user']['logedIn'] = true;
             
             header("Location: ../Views/user/home.php");

@@ -17,10 +17,16 @@
     echo $_SESSION["user"]["email"] . "<br>";
     echo $_SESSION["user"]["name"] . "<br>";
     echo $_SESSION["user"]["phone"] . "<br>";
+    echo $_SESSION["user"]["role"] . "<br>";
 ?>
 
 <form method="POST">
     <input type="submit" name="logOut" value="Logg ut">
 </form>
-
+<?php 
+if(isset($msg)){
+    echo $msg;
+    unset($msg);
+}
+?>
 <?php include(__DIR__ . "/../layout/footer.php")?>
