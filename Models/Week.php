@@ -63,24 +63,6 @@ class Week
         return $date;
     }
 
-    #plasserer timeslots inne i alle dagene assosiert med uken
-    /*public function insertTimeSlots($timeSlots){
-        foreach($timeSlots as $timeSlot){
-            //$timeSlotTime = $timeSlot -> start_time;
-
-            #Finner basert på time må ha minutter satt til 00 for å fungere
-            $timeSlotTime = strval($timeSlot -> start_time);
-            $explodedTimeSlotTime = explode(":",$timeSlotTime);
-            $modifiedTime = $explodedTimeSlotTime[0] . ":00:00";
-
-            $timeSlotDate = $timeSlot -> date;
-            $day = $this -> getDayInWeekByDate($timeSlotDate);
-            if(!$day == null){
-                array_push($day -> timeArray[$modifiedTime], $timeSlot);
-            }
-        }
-    }*/
-
     public function insertTimeSlots($timeSlots){
         foreach($timeSlots as $timeSlot){
             $timeSlotDate = $timeSlot -> date;

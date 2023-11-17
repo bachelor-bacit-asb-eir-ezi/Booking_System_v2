@@ -10,7 +10,7 @@
     }
 
     if (!$_SESSION["user"]["logedIn"]) {
-        header("location: startPage.php");
+        header("location: index.php");
         exit;
     }
     echo $_SESSION["user"]["id"] . "<br>";

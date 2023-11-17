@@ -48,7 +48,7 @@
 
         session_start();
         $_SESSION['logOutMsg'] = "Du er nå logget ut";
-        header("location: ../startPage.php");
+        header("location: ../index.php");
         exit;
     }
 ?>
