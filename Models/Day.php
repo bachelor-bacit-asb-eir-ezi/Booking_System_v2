@@ -20,23 +20,7 @@ class Day
     function __construct($dayName,$date) {
         $this->dayName = $dayName;
         $this->date = $date;
-        //$this->timeArray = $this->fillTimeArray();
-        $this -> timeArray = array(); //skal teste bedre måte å vise time slots på
-      }
-    
-      #Fyller timeArray med key/value pair der key er klokkeslett og value er null
-      private function fillTimeArray(){ //private fordi denne skal bare kjøres en gang av constructor
-        for($i = 7; $i < 24; $i++){
-          $j = strval($i);
-          if ($i < 10){
-            $keyVal = "0".$j.":00:00";
-            $timeArray[$keyVal] = array();
-          } else{
-            $keyVal = $j.":00:00";
-            $timeArray[$keyVal] = array();
-          }
-        }
-        return $timeArray;
+        $this -> timeArray = array();
       }
 
       public function getDayName(){
