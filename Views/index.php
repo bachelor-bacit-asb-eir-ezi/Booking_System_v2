@@ -13,7 +13,7 @@
     <div class="card">
         <div class="card-body">
 
-            <img src="/images/hanau.png" alt="PHP Elephant" class="img-crop mb-3">
+            <img src="../images/hanau.png" alt="PHP Elephant" class="img-crop mb-3">
 
 
             <?php
