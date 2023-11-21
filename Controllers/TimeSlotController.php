@@ -6,11 +6,11 @@ require_once(__DIR__ . "/../Models/Week.php");
 require_once(__DIR__ . "/../Tools/Validate.php");
 
 #Calender endre uke
-if(isset($_POST["changeWeek"])){
-    $year =  $_POST["currentYear"];
-    switch ($_POST["typeOfChange"]) {
+if(isset($_GET["changeWeek"])){
+    $year =  $_GET["currentYear"];
+    switch ($_GET["changeWeek"]) {
         case "nextWeek":
-            $weekNumber = $_POST["weekNumber"];
+            $weekNumber = $_GET["weekNumber"];
             $weekNumber++;
             if ($weekNumber > 52){
                 $year ++;
@@ -18,7 +18,7 @@ if(isset($_POST["changeWeek"])){
             }
             break;
         case "prevWeek":
-            $weekNumber = $_POST["weekNumber"];
+            $weekNumber = $_GET["weekNumber"];
             $weekNumber--;
             if ($weekNumber < 1){
                 $year --;
@@ -27,7 +27,7 @@ if(isset($_POST["changeWeek"])){
             break;
         case "searchWeek":
             #for å forhindre at bruker kan søke på ukenummer høyere en mulig eller lavere (0 < weekNumber < 53)
-            switch ($weekNumber = $_POST["weekNumber"]){
+            switch ($weekNumber = $_GET["weekNumber"]){
                 case $weekNumber < 1:
                     $weekNumber = 1;
                     break;
@@ -35,7 +35,7 @@ if(isset($_POST["changeWeek"])){
                     $weekNumber = 52;
                     break;
                 default:
-                    $weekNumber = $_POST["weekNumber"];
+                    $weekNumber = $_GET["weekNumber"];
                     break;
             }
             break;
