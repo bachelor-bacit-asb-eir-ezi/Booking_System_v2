@@ -11,7 +11,6 @@ if(isset($_GET["changeWeek"])){
     switch ($_GET["changeWeek"]) {
         case "nextWeek":
             $weekNumber = $_GET["weekNumber"];
-            $weekNumber++;
             if ($weekNumber > 52){
                 $year ++;
                 $weekNumber = 1;
@@ -19,7 +18,6 @@ if(isset($_GET["changeWeek"])){
             break;
         case "prevWeek":
             $weekNumber = $_GET["weekNumber"];
-            $weekNumber--;
             if ($weekNumber < 1){
                 $year --;
                 $weekNumber = 52;

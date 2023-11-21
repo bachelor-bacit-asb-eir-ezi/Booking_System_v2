@@ -12,7 +12,7 @@
     echo "<b>" . $week -> getWeekNumber() . "</b>";
     echo "<div class='d-flex justify-content-center'>";
     echo "<form method='GET' class='mx-5 mb-3'>";
-        echo "<input type='hidden' name='weekNumber' value='". $week -> getWeekNumber() . "'>";
+        echo "<input type='hidden' name='weekNumber' value='". $week -> getWeekNumber() - 1 . "'>";
         echo "<input type='hidden' name='currentYear' value='" . $week -> getYear() . "'>";
         echo "<button type='submit' name='changeWeek' value='prevWeek' class='btn btn-secondary'>Forrige</button>";
     echo "</form>";
@@ -23,7 +23,7 @@
         echo "<button type='submit' name='changeWeek' value='searchWeek' class='btn btn-secondary'>Søk</button>";
     echo "</form>";
     echo "<form method='GET' class='mx-5 mb-3'>";
-        echo "<input type='hidden' name='weekNumber' value='". $week -> getWeekNumber() . "'>";
+        echo "<input type='hidden' name='weekNumber' value='". $week -> getWeekNumber() + 1 . "'>";
         echo "<input type='hidden' name='currentYear' value='" . $week -> getYear() . "'>";
         echo "<button type='submit' name='changeWeek' value='nextWeek' class='btn btn-secondary'>Neste</button>";
     echo "</form>";
