@@ -39,14 +39,14 @@ if(isset($_GET["changeWeek"])){
             break;
     }
     $week = new Week($weekNumber,$year);
-    $timeSlots = TimeSlot::getTimeSlots($weekNumber);
+    $timeSlots = TimeSlot::getTimeSlots($weekNumber,$year);
     $week -> insertTimeSlots($timeSlots);
 } else {
     $weekNumber = date("W");
     $year = date("Y");
 
     $week = new Week($weekNumber,$year);
-    $timeSlots = TimeSlot::getTimeSlots($weekNumber);
+    $timeSlots = TimeSlot::getTimeSlots($weekNumber,$year);
     $week -> insertTimeSlots($timeSlots);
 }
 
