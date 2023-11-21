@@ -3,6 +3,7 @@
 
     require(__DIR__ . "/../Tools/Validate.php");
     require(__DIR__ . "/../Tools/dbcon.php");
+    require(__DIR__ . "/../Models/User.php");
 
 
     if(isset($_POST["logIn"])){
@@ -42,29 +43,20 @@
         }
         
     } elseif (isset($_POST["register"])) {
-        // Code for user registration
         $firstname = Validate::sanitize($_POST["firstname"]);
         $lastname = Validate::sanitize($_POST["lastname"]);
         $email = Validate::sanitize($_POST["email"]);
         $password = password_hash(Validate::sanitize($_POST["password"]), PASSWORD_DEFAULT);
         $phone_number = Validate::sanitize($_POST["phone_number"]);
     
-        $sql = "INSERT INTO users (firstname, lastname, email, password, phone_number) 
-                VALUES (:firstname, :lastname, :email, :password, :phone_number)";
+        $registrationResult = $userModel->registerUser($firstname, $lastname, $email, $password, $phone_number);
     
-        $sp = $pdo->prepare($sql);
-    
-        $sp->bindParam(":firstname", $firstname, PDO::PARAM_STR);
-        $sp->bindParam(":lastname", $lastname, PDO::PARAM_STR);
-        $sp->bindParam(":email", $email, PDO::PARAM_STR);
-        $sp->bindParam(":password", $password, PDO::PARAM_STR);
-        $sp->bindParam(":phone_number", $phone_number, PDO::PARAM_STR);
-    
-        try {
-            $sp->execute();
-            echo "Registration successful!"; // You might want to redirect or handle this differently
-        } catch (PDOException $e) {
-            echo $e->getMessage(); // Log or handle the error appropriately
+        if ($registrationResult) {
+            $_SESSION['registrationMsg'] = "Du har registrert deg!"; // Save a success message in the session
+            header("Location: ../index.php");
+            exit();
+        } else {
+            echo "Registrering feilet. Prøv igjen";
         }
     
     } elseif (isset($_REQUEST["logOut"])) {

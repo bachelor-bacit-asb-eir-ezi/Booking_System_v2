@@ -8,6 +8,8 @@
 </head>
 <body class="bg-light">
     <div class="container mt-5">
+    <form method="post" action="/tools/register_process.php" class="col-md-6 offset-md-3 bg-white p-4 shadow rounded">
+
         <form method="post" action="/register/process" class="col-md-6 offset-md-3 bg-white p-4 shadow rounded">
             <h2 class="text-center mb-4">Bruker Registrering</h2>
 
@@ -41,7 +43,7 @@
                 <input type="password" name="confirm_password" class="form-control" required>
             </div>
 
-            <button type="submit" class="btn btn-primary">Registrer</button>
+            <button type="submit" name="register" class="btn btn-primary">Registrer</button>
         </form>
     </div>
 
