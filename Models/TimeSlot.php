@@ -42,10 +42,17 @@ class TimeSlot{
         }
     }
 
-    public static function getTimeSlots($weekNumber){
-        $day = date($weekNumber);
-        $weekStart = date('Y-m-d', strtotime('-'.$day.' days'));
-        $weekEnd = date('Y-m-d', strtotime('+'.(6-$day).' days'));
+    public static function getTimeSlots($weekNumber,$year){
+        #Finner dato, bruker mandag som første dag og søndag som site dag
+        $weekStart = new DateTime();
+        $weekStart->setISODate($year, $weekNumber, 1); 
+
+        $weekEnd = clone $weekStart;
+        $weekEnd->modify('+6 days');
+
+        #Gjør de til string for at de skal bli akseptert i bindparem
+        $weekStart =  $weekStart -> format("Y-m-d");
+        $weekEnd = $weekEnd -> format("Y-m-d");
 
         global $pdo;
 
@@ -65,7 +72,7 @@ class TimeSlot{
         } catch (PDOException $e){
             echo $e; //Bør logges istedenfor skrevet ut, sikkerhets risiko
         }
-
+        $timeslots = array();
         #Så lenge den henter rows skal while løkken kjøre, stopper når det ikke er flere rows å hente
         while ($row = $query->fetch(PDO::FETCH_OBJ)) {
             $timeslots[] = $row; 
