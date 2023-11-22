@@ -30,6 +30,9 @@
                 <li class="nav-item">
                     <a class="nav-link" href="../timeSlot/show.php">Booket timer</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../user/home.php?logOut">Log ut (temp)</a>
+                </li>
             </ul>
 
             <form method="POST" class="d-flex">
