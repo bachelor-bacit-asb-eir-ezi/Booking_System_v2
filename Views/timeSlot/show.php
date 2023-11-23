@@ -12,7 +12,6 @@ if (!$_SESSION["user"]["logedIn"]){
 
 $timeSlot = TimeSlot::getTimeSlotDetails($_GET["timeSlotId"]);
 
-
 echo "<div>
     <form>";
     echo "<label for='date'>Dato:</label>";
@@ -52,6 +51,20 @@ echo "<div>
     }
 
     echo "</div>";
-?>
 
+    if($timeSlot -> tutor_id === $_SESSION["user"]["id"]){
+        #Temp possiosjon, vet ikke hvor ellers den kan bli plassert
+        echo "<div class='mt-5'>";
+        echo "<form method='POST'>";
+        echo "<button name='delete' class='btn btn-danger' 
+                value='{$timeSlot -> timeslot_id}' type='submit'>Slett</button>";
+        echo "</form>";
+        echo "</div>";
+    }
+?>
+<script>
+if ( window.history.replaceState ) {
+        window.history.replaceState( null, null, window.location.href );
+    }
+</script>
 <?php include(__DIR__ . "/../layout/footer.php")?>

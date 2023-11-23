@@ -87,4 +87,11 @@ if (isset($_POST["unBookTimeSlot"])){
     header("location: ../timeSlot/calender.php");
     exit;
 }
+
+if (isset($_POST["delete"])){
+    $id = Validate::sanitize($_POST["delete"]);
+    TimeSlot::delTimeSlot($id);
+    header("location: ../timeSlot/calender.php");
+    exit;
+}
 ?>

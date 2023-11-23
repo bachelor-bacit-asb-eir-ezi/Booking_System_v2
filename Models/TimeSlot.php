@@ -158,5 +158,24 @@ class TimeSlot{
             error_log($e);
         }
     }
+
+    public static function delTimeSlot($id){
+        global $pdo;
+
+        $sql = "DELETE FROM time_slots
+            WHERE timeslot_id = :timeslot_id";
+
+        $query = $pdo -> prepare($sql);
+        #Id blir sanetized før levert til metoden
+        $query -> bindParam(":timeslot_id", $id);
+
+        try{
+            #Sjekker om sql statement er skrevet korrekt
+            $query -> execute();
+        } catch (PDOException $e){
+            echo "En feil oppstod";
+            error_log($e);
+        }
+    }
 }
 ?>
