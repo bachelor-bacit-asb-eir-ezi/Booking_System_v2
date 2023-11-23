@@ -58,7 +58,7 @@ class TimeSlot{
 
         global $pdo;
 
-        $sql = "SELECT timeslot_id, name AS tutor_name, time_slots.date, start_time, end_time, location, description, booked_by 
+        $sql = "SELECT timeslot_id, tutor_id, name AS tutor_name, time_slots.date, start_time, end_time, location, description, booked_by 
         FROM time_slots 
         INNER JOIN users ON tutor_id = users.id
         WHERE time_slots.date >= :weekStart AND time_slots.date <= :weekEnd
