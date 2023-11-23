@@ -1,70 +1,44 @@
-<?php include(__DIR__ . "/../layout/header.php")?>
+<?php include(__DIR__ . "/../layout/header.php"); ?>
 
 <?php
 require_once(__DIR__ . "/../../Controllers/TimeSlotController.php");
 
-if (!$_SESSION["user"]["logedIn"]){
-    header("location: ../index.php");
-    exit;
-}
-
-#Må gjøres: sjekk om bruker er student som booket time
-
-$timeSlot = TimeSlot::getTimeSlotDetails($_GET["timeSlotId"]);
-
-echo "<div>
-    <form>";
-    echo "<label for='date'>Dato:</label>";
-    echo "<input class='form-control' name='date' readonly type='text' value='". $timeSlot->date ."'>";
-
-    echo "<label for='startTime'>Start tid:</label>";
-    echo "<input class='form-control' name='startTime' readonly type='text' value='". $timeSlot->start_time ."'>";
-
-    echo "<label for='endTime'>Slutt tid:</label>";
-    echo "<input class='form-control' name='endTime' readonly type='text' value='". $timeSlot->end_time ."'>";
-
-    echo "<label for='tutor'>Veileder tilstede:</label>";
-    echo "<input class='form-control' name='tutor' readonly type='text' value='". $timeSlot->tutor_name ."'>";
-
-    echo "<label for='location'>Sted:</label>";
-    echo "<input class='form-control' name='location' readonly type='text' value='". $timeSlot->location ."'>";
-
-    echo "<label for='description'>Tema i fokus:</label>";
-    echo "<input class='form-control' name='description' readonly type='text' value='". $timeSlot->description ."'>";
-
-    if($timeSlot -> booked_by !== null){
-        echo "<label for='bookedBy'>Booket av:</label>";
-        echo "<input class='form-control' name='bookedBy' readonly type='text' value='". $timeSlot->student_name ."'>";
+    //Må vær logget inn
+    if (!isset($_SESSION["user"]["logedIn"]) || !$_SESSION["user"]["logedIn"]) {
+        header("Location: ../index.php");
+        exit;
     }
-    echo "</form>";
-
-    if($timeSlot -> booked_by === null){
-        echo "<form method='POST'>";
-            echo "<input name='timeSlotId' type='hidden' value='" . $timeSlot -> timeslot_id . "'>";
-            echo "<input type='submit' name='bookTimeSlot' value='Book veilednings time'>";
-        echo "</form>";
-    }elseif($timeSlot -> booked_by === $_SESSION["user"]["id"]){
-        echo "<form method='POST'>";
-            echo "<input name='timeSlotId' type='hidden' value='" . $timeSlot -> timeslot_id . "'>";
-            echo "<input type='submit' name='unBookTimeSlot' value='Unbook veilednings time'>";
-        echo "</form>";
+    //Admin-tilgang
+    if ($_SESSION["user"]["role"] !== "tutor"){
+        $_SESSION["msg"] = "Du har ikke tilgang til den siden";
+        header("location: ../user/home.php");
+        exit;
     }
+$timeSlots = TimeSlot::getAllTimeSlots();
 
-    echo "</div>";
-
-    if($timeSlot -> tutor_id === $_SESSION["user"]["id"]){
-        #Temp possiosjon, vet ikke hvor ellers den kan bli plassert
-        echo "<div class='mt-5'>";
-        echo "<form method='POST'>";
-        echo "<button name='delete' class='btn btn-danger' 
-                value='{$timeSlot -> timeslot_id}' type='submit'>Slett</button>";
-        echo "</form>";
-        echo "</div>";
-    }
 ?>
-<script>
-if ( window.history.replaceState ) {
-        window.history.replaceState( null, null, window.location.href );
-    }
-</script>
-<?php include(__DIR__ . "/../layout/footer.php")?>
+<div class="container mt-4">
+    <div class="row">
+        <?php foreach ($timeSlots as $timeSlot): ?>
+            <div class="col-md-4 mb-4">
+                <div class="card h-100">
+                    <div class="card-header">
+                        Veileder: <?= htmlspecialchars($timeSlot->tutor_name) ?>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">Dato: <?= htmlspecialchars($timeSlot->date) ?></li>
+                        <li class="list-group-item">Start tid: <?= htmlspecialchars($timeSlot->start_time) ?></li>
+                        <li class="list-group-item">Slutt tid: <?= htmlspecialchars($timeSlot->end_time) ?></li>
+                        <li class="list-group-item">Sted: <?= htmlspecialchars($timeSlot->location) ?></li>
+                        <li class="list-group-item">Tema: <?= htmlspecialchars($timeSlot->description) ?></li>
+                        <?php if ($timeSlot->booked_by): ?>
+                            <li class="list-group-item">Booket av: <?= htmlspecialchars($timeSlot->booked_by) ?></li>
+                        <?php endif; ?>
+                    </ul>
+                </div>
+            </div>
+        <?php endforeach; ?>
+    </div>
+</div>
+
+<?php include(__DIR__ . "/../layout/footer.php"); ?>
