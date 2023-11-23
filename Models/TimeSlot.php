@@ -1,5 +1,6 @@
 <?php 
 require(__DIR__ . '/../tools/dbcon.php');
+require(__DIR__ . '/../tools/Validate.php');
 
 
 class TimeSlot{
@@ -82,7 +83,7 @@ class TimeSlot{
 
     public static function getTimeSlotDetails($id){
         global $pdo;
-        
+
         $sql = "SELECT timeslot_id, 
                 users_a.name AS tutor_name, 
                 tutor_id, date, 
@@ -100,7 +101,7 @@ class TimeSlot{
             WHERE timeslot_id = :timeslot_id";
 
         $query = $pdo -> prepare($sql);
-        $query -> bindParam(":timeslot_id", $id);
+        $query -> bindParam(":timeslot_id", Validate::sanitize($id));
 
         try{
             #Sjekker om sql statement er skrevet korrekt
