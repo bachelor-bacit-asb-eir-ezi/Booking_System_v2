@@ -22,7 +22,8 @@
             #Sjekker om sql statement er skrevet korrekt
             $sp -> execute();
         } catch (PDOException $e){
-            echo $e; //Bør logges istedenfor skrevet ut, sikkerhets risiko
+            echo "En feil oppstod";
+            error_log($e);
         }
 
         $user = $sp -> fetch(PDO::FETCH_OBJ);

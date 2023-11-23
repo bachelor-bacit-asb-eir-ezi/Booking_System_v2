@@ -49,7 +49,7 @@
                             echo "<input type='submit' name='getTimeSlotInfo' value='Vis'>";
                         echo "</form>";
                     echo "</div>"; 
-                } else {
+                } elseif($timeSlot -> booked_by === $_SESSION["user"]["id"] || $timeSlot -> tutor_id === $_SESSION["user"]["id"]) {
                     echo "<div class='timeSlotStyle occupiedTimeSlot cell'>" . $formatedTime . "<br>" . $timeSlot -> tutor_name;
                         echo "<form method='GET' action='show.php?timeslotId=". $timeSlot -> timeslot_id . 
                                 "' id='" . $timeSlot -> timeslot_id . "timeSlotForm'>";

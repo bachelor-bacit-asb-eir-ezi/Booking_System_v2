@@ -8,6 +8,7 @@
     try {
         $pdo = new PDO($dsn, DB_USER, DB_PASS);
     } catch (PDOException $e) {
-        echo "Error connecting to database: " . $e->getMessage(); // Aldri gjør dette i produksjon!
+        echo "Server er under vedlikeholding";
+        error_log($e);
     }
 ?>
