@@ -44,7 +44,7 @@ echo "<div>
             echo "<input name='timeSlotId' type='hidden' value='" . $timeSlot -> timeslot_id . "'>";
             echo "<input type='submit' name='bookTimeSlot' value='Book veilednings time'>";
         echo "</form>";
-    }else{
+    }elseif($timeSlot -> booked_by === $_SESSION["user"]["id"]){
         echo "<form method='POST'>";
             echo "<input name='timeSlotId' type='hidden' value='" . $timeSlot -> timeslot_id . "'>";
             echo "<input type='submit' name='unBookTimeSlot' value='Unbook veilednings time'>";

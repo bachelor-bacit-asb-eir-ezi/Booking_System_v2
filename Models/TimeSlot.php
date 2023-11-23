@@ -39,7 +39,8 @@ class TimeSlot{
             #Sjekker om sql statement er skrevet korrekt
             $query -> execute();
         } catch (PDOException $e){
-            echo $e; //Bør logges istedenfor skrevet ut, sikkerhets risiko
+            echo "En feil oppstod";
+            error_log($e);
         }
     }
 
@@ -71,7 +72,8 @@ class TimeSlot{
             #Sjekker om sql statement er skrevet korrekt
             $query -> execute();
         } catch (PDOException $e){
-            echo $e; //Bør logges istedenfor skrevet ut, sikkerhets risiko
+            echo "En feil oppstod";
+            error_log($e);
         }
         $timeslots = array();
         #Så lenge den henter rows skal while løkken kjøre, stopper når det ikke er flere rows å hente
@@ -83,6 +85,8 @@ class TimeSlot{
 
     public static function getTimeSlotDetails($id){
         global $pdo;
+
+        $sanetizedID = Validate::sanitize($id);
 
         $sql = "SELECT timeslot_id, 
                 users_a.name AS tutor_name, 
@@ -101,13 +105,14 @@ class TimeSlot{
             WHERE timeslot_id = :timeslot_id";
 
         $query = $pdo -> prepare($sql);
-        $query -> bindParam(":timeslot_id", Validate::sanitize($id));
+        $query -> bindParam(":timeslot_id", $sanetizedID);
 
         try{
             #Sjekker om sql statement er skrevet korrekt
             $query -> execute();
         } catch (PDOException $e){
-            echo $e; //Bør logges istedenfor skrevet ut, sikkerhets risiko
+            echo "En feil oppstod";
+            error_log($e);
         }
 
         $timeslot = $query -> fetch(PDO::FETCH_OBJ);
@@ -130,7 +135,8 @@ class TimeSlot{
             #Sjekker om sql statement er skrevet korrekt
             $query -> execute();
         } catch (PDOException $e){
-            echo $e; //Bør logges istedenfor skrevet ut, sikkerhets risiko
+            echo "En feil oppstod";
+            error_log($e);
         }
     }
 
@@ -148,7 +154,8 @@ class TimeSlot{
             #Sjekker om sql statement er skrevet korrekt
             $query -> execute();
         } catch (PDOException $e){
-            echo $e; //Bør logges istedenfor skrevet ut, sikkerhets risiko
+            echo "En feil oppstod";
+            error_log($e);
         }
     }
 }
