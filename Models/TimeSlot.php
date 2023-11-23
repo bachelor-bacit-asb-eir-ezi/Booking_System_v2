@@ -177,5 +177,27 @@ class TimeSlot{
             error_log($e);
         }
     }
-}
-?>
+    //Henter alle "slotsene" brukt til ledige/booket timer
+    public static function getAllTimeSlots()
+    {
+        global $pdo;
+
+        $sql = "SELECT timeslot_id, tutor_id, name AS tutor_name, date, start_time, end_time, location, description, booked_by 
+    FROM time_slots 
+    INNER JOIN users ON tutor_id = users.id
+    ORDER BY date, start_time;";
+
+        $query = $pdo->prepare($sql);
+
+        try {
+            $query->execute();
+            $timeslots = $query->fetchAll(PDO::FETCH_OBJ);
+            return $timeslots;
+        } catch (PDOException $e) {
+            echo "En feil oppstod";
+            error_log($e);
+            return [];
+            }
+        }
+    }
+        ?>

@@ -13,16 +13,22 @@
         header("location: index.php");
         exit;
     }
-    echo $_SESSION["user"]["id"] . "<br>";
-    echo $_SESSION["user"]["email"] . "<br>";
-    echo $_SESSION["user"]["name"] . "<br>";
-    echo $_SESSION["user"]["phone"] . "<br>";
-    echo $_SESSION["user"]["role"] . "<br>";
+echo '<div class="container mt-8">
+        <div class="card" style="width: 15rem;">
+            <div class="card-body">
+                <h5 class="card-title">Min profil</h5>
+                <h6 class="card-subtitle mb-2 text-muted">User ID: ' . htmlspecialchars($_SESSION["user"]["id"]) . '</h6>
+                <p class="card-text">Email: ' . htmlspecialchars($_SESSION["user"]["email"]) . '</p>
+                <p class="card-text">Navn: ' . htmlspecialchars($_SESSION["user"]["name"]) . '</p>
+                <p class="card-text">Telefonnummer: ' . htmlspecialchars($_SESSION["user"]["phone"]) . '</p>
+                <p class="card-text">Rolle: ' . htmlspecialchars($_SESSION["user"]["role"]) . '</p>
+                
+            </div>
+        </div>
+      </div>';
 ?>
 
-<form method="POST">
-    <input type="submit" name="logOut" value="Logg ut">
-</form>
+
 <?php 
 if(isset($msg)){
     echo $msg;
