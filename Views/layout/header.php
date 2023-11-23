@@ -12,32 +12,32 @@
 <body>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
-        <a class="navbar-brand" href="">UIA bookingsystem</a>
+        <a class="navbar-brand " href="">UIA bookingsystem</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link" href="../timeSlot/calender.php">Tidsluker</a>
+                    <a class="btn btn-outline-secondary" href="../timeSlot/calender.php">Tidsluker</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="../timeSlot/create.php">Opprett tid</a>
+                    <a class="btn btn-outline-secondary" href="../timeSlot/create.php">Opprett tid</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="../user/home.php">Min profil</a>
+                    <a class="btn btn-outline-secondary" href="../user/home.php">Min profil</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="../timeSlot/show.php">Booket timer</a>
+                    <a class="btn btn-outline-secondary" href="../timeSlot/show.php">Ledige/booket timer</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="../user/home.php?logOut">Log ut (temp)</a>
-                </li>
+                <form>
+                    <a class="btn btn-outline-danger" href="../user/home.php?logOut" role="button">Logg ut</a>
+                </form>
+
+
             </ul>
 
-            <form method="POST" class="d-flex">
-                <input class="btn btn-outline-danger" type="submit" name="logOut" value="Logg ut">
-            </form>
+
         </div>
     </div>
 </nav>
