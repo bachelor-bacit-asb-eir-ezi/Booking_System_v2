@@ -28,7 +28,7 @@
                     <a class="btn btn-outline-secondary" href="../user/home.php">Min profil</a>
                 </li>
                 <li class="nav-item">
-                    <a class="btn btn-outline-secondary" href="../timeSlot/show.php">Ledige/booket timer</a>
+                    <a class="btn btn-outline-secondary" href="../timeSlot/showList.php">Ledige/booket timer</a>
                 </li>
                 <form>
                     <a class="btn btn-outline-danger" href="../user/home.php?logOut" role="button">Logg ut</a>

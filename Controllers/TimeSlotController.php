@@ -69,11 +69,6 @@ if (isset($_POST["createTimeSlot"])){
     exit;
 }
 
-#Show info om time slot
-if (isset($_GET["showTimeSlotInfo"])){
-    header("location: show.php");
-    exit;
-}
 
 #Book og unbook timeslot
 if (isset($_POST["bookTimeSlot"])){
