@@ -31,22 +31,22 @@
     echo "<form method='GET' class='mx-5 mb-3'>";
         echo "<input type='hidden' name='weekNumber' value='". $prevWeek . "'>";
         echo "<input type='hidden' name='currentYear' value='" . $prevYear . "'>";
-        echo "<button type='submit' name='changeWeek' value='prevWeek' class='btn btn-secondary'>Forrige</button>";
+        echo "<button type='submit' class='btn btn-secondary'>Forrige</button>";
     echo "</form>";
     echo "<form method='GET' class='mx-5 mb-3'>";
         echo "<label for='weekNumber'> Søk etter uke: </label>";
         echo "<input type='int' name='weekNumber' min='1' max='52'>";
         echo "<input type='hidden' name='currentYear' value='" . $curYear . "'>";
-        echo "<button type='submit' name='changeWeek' value='searchWeek' class='btn btn-secondary'>Søk</button>";
+        echo "<button type='submit'  class='btn btn-secondary'>Søk</button>";
     echo "</form>";
     echo "<form method='GET' class='mx-5 mb-3'>";
         echo "<input type='hidden' name='weekNumber' value='". $nextWeek . "'>";
         echo "<input type='hidden' name='currentYear' value='" . $nextYear . "'>";
-        echo "<button type='submit' name='changeWeek' value='nextWeek' class='btn btn-secondary'>Neste</button>";
+        echo "<button type='submit'  class='btn btn-secondary'>Neste</button>";
     echo "</form>";
     echo "</div>";
     echo "<div id='calender'>";
-        foreach ($week -> getDaysInWeek() as $day){
+        /*foreach ($week -> getDaysInWeek() as $day){
             $dateDay = DateTime::createFromFormat("Y-m-d", $day -> getDate());
             $formatedDate = $dateDay->format("d-m-Y");
 
@@ -77,7 +77,7 @@
                 }
             }
         echo "</div>";
-        }
+        }*/
     echo "</div>";
 ?>
 
@@ -87,27 +87,30 @@
         var calender = document.getElementById("calender");
         var xhr = new XMLHttpRequest();
 
-        // Get the current URL
+        //trenger verdiene fra url, så henter url først
         var currentUrl = window.location.href;
 
-        // Use the URLSearchParams API to extract parameters from the URL
+        // henter ut get elementene fra url
         var urlParams = new URLSearchParams(currentUrl.split("?")[1]);
 
-        // Extract year and weekNumber from the URL parameters
+        // henter ut veriden til get elementene 
         var currentYear = urlParams.get("currentYear");
         var weekNumber = urlParams.get("weekNumber");
 
-        // Replace 'your_script.php' with the actual path to your PHP script
+        // sti til fil som gir dataen som skal inn i kalender
         var url = "../../Controllers/CalenderGenerator.php";
 
-        // Parameters to be sent in the GET request
-        var params = "changeWeek=true&currentYear=" + currentYear + "&weekNumber=" + weekNumber;
+        //parameterene som skal bli sent til filen 
+        if(!currentYear == null || !weekNumber == null){
+            var params = "calender=true&currentYear=" + currentYear + "&weekNumber=" + weekNumber;
+        } else {
+            var params = "";
+        }
         xhr.open("GET", url + "?" + params, true);
 
         xhr.onreadystatechange = function() {
             if (xhr.readyState == 4 && xhr.status == 200) {
                 // Handle the response if needed
-                console.log(xhr.responseText);
                 calender.innerHTML = xhr.responseText;
             }
         };
@@ -115,6 +118,7 @@
         xhr.send();
     }
 
+    updateTimeSlotInCalender();
     setInterval(updateTimeSlotInCalender, 5000);
 </script>
 
