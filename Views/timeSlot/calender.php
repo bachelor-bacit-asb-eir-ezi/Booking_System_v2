@@ -99,7 +99,7 @@ echo "</div>";
 
        
         // Replace 'your_script.php' with the actual path to your PHP script
-        var url = "../../Controllers/CalenderGenerator.php";
+        var url = "../../Tools/CalenderGenerator.php";
 
         // Parameters to be sent in the GET request
         

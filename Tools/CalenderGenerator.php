@@ -1,5 +1,5 @@
 <?php
-require_once(__DIR__ . "/TimeSlotController.php");
+require_once(__DIR__ . "/../Controllers/TimeSlotController.php");
 
 global $week;
 
