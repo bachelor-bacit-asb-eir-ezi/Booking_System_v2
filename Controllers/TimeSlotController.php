@@ -6,30 +6,20 @@ require_once(__DIR__ . "/../Models/Week.php");
 require_once(__DIR__ . "/../Tools/Validate.php");
 
 #Calender endre uke
-if(isset($_GET["weekNumber"]) && isset($_GET["currentYear"])){
-    echo "Lars";
-    if (isset($_GET["currentYear"])){
-        $year =  $_GET["currentYear"];
-    } else {
-        $year = date("Y");
-    }
-    if (isset($_GET["weekNumber"])){
-        $weekNumber =  $_GET["weekNumber"];
-    } else {
-        $weekNumber = date("W");
-    }
+if(isset($_GET["changeWeek"])){
+    $year =  $_GET["currentYear"];
+    $weekNumber = $_GET["weekNumber"];
+
     $week = new Week($weekNumber,$year);
     $timeSlots = TimeSlot::getTimeSlots($weekNumber,$year);
     $week -> insertTimeSlots($timeSlots);
-} else {
-    echo "not";
+} else{
     $weekNumber = date("W");
     $year = date("Y");
     
     $week = new Week($weekNumber,$year);
     $timeSlots = TimeSlot::getTimeSlots($weekNumber,$year);
     $week -> insertTimeSlots($timeSlots);
-    
 }
 
 #Create Timeslot

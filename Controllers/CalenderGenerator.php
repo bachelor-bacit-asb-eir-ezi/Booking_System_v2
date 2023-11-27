@@ -3,6 +3,7 @@ require_once(__DIR__ . "/TimeSlotController.php");
 
 global $week;
 
+
 echo "<div id='calender'>";
 foreach ($week -> getDaysInWeek() as $day){
     $dateDay = DateTime::createFromFormat("Y-m-d", $day -> getDate());
