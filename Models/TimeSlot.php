@@ -58,7 +58,7 @@ class TimeSlot{
 
         global $pdo;
 
-        $sql = "SELECT timeslot_id, tutor_id, name AS tutor_name, time_slots.date, start_time, end_time, location, description, booked_by 
+        $sql = "SELECT timeslot_id, tutor_id, firstname AS tutor_fname, lastname AS tutor_lname, time_slots.date, start_time, end_time, location, description, booked_by 
         FROM time_slots 
         INNER JOIN users ON tutor_id = users.id
         WHERE time_slots.date >= :weekStart AND time_slots.date <= :weekEnd
@@ -89,14 +89,16 @@ class TimeSlot{
         $sanetizedID = Validate::sanitize($id);
 
         $sql = "SELECT timeslot_id, 
-                users_a.name AS tutor_name, 
+                users_a.firstname AS tutor_fname, 
+                users_a.lastname AS tutor_lname, 
                 tutor_id, date, 
                 start_time, 
                 end_time, 
                 location, 
                 description, 
                 booked_by, 
-                users_b.name AS student_name 
+                users_b.firstname AS student_fname, 
+                users_b.lastname AS student_lname 
             FROM time_slots 
             INNER JOIN users AS users_a 
                 ON users_a.id = tutor_id 

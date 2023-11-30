@@ -42,7 +42,7 @@
                 $time = DateTime::createFromFormat("H:i:s" , $timeSlot -> start_time);
                 $formatedTime = $time->format("H:i");
                 if ($timeSlot -> booked_by === null){
-                    echo "<div class='timeSlotStyle availebleTimeSlot cell'>" . $formatedTime . "<br>" . $timeSlot -> tutor_name;
+                    echo "<div class='timeSlotStyle availebleTimeSlot cell'>" . $formatedTime . "<br>" . $timeSlot -> tutor_fname . " " . $timeSlot -> tutor_lname;
                         echo "<form method='GET' action='show.php?timeslotId=". $timeSlot -> timeslot_id . 
                                 "' id='" . $timeSlot -> timeslot_id . "timeSlotForm'>";
                             echo "<input type='hidden' name='timeSlotId' value='" . $timeSlot -> timeslot_id . "'>";
@@ -50,7 +50,7 @@
                         echo "</form>";
                     echo "</div>"; 
                 } elseif($timeSlot -> booked_by === $_SESSION["user"]["id"] || $timeSlot -> tutor_id === $_SESSION["user"]["id"]) {
-                    echo "<div class='timeSlotStyle occupiedTimeSlot cell'>" . $formatedTime . "<br>" . $timeSlot -> tutor_name;
+                    echo "<div class='timeSlotStyle occupiedTimeSlot cell'>" . $formatedTime . "<br>" . $timeSlot -> tutor_fname . " " . $timeSlot -> tutor_lname;
                         echo "<form method='GET' action='show.php?timeslotId=". $timeSlot -> timeslot_id . 
                                 "' id='" . $timeSlot -> timeslot_id . "timeSlotForm'>";
                             echo "<input type='hidden' name='timeSlotId' value='" . $timeSlot -> timeslot_id . "'>";

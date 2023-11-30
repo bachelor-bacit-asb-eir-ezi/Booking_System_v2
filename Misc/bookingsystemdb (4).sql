@@ -3,8 +3,8 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 30, 2023 at 05:18 PM
--- Server version: 10.4.28-MariaDB
+-- Generation Time: 30. Nov, 2023 17:57 PM
+-- Tjener-versjon: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
@@ -24,7 +24,7 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `message`
+-- Tabellstruktur for tabell `message`
 --
 
 CREATE TABLE `message` (
@@ -38,7 +38,7 @@ CREATE TABLE `message` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `migrations`
+-- Tabellstruktur for tabell `migrations`
 --
 
 CREATE TABLE `migrations` (
@@ -48,7 +48,7 @@ CREATE TABLE `migrations` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `migrations`
+-- Dataark for tabell `migrations`
 --
 
 INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
@@ -62,7 +62,7 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `password_reset_tokens`
+-- Tabellstruktur for tabell `password_reset_tokens`
 --
 
 CREATE TABLE `password_reset_tokens` (
@@ -74,7 +74,7 @@ CREATE TABLE `password_reset_tokens` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `personal_access_tokens`
+-- Tabellstruktur for tabell `personal_access_tokens`
 --
 
 CREATE TABLE `personal_access_tokens` (
@@ -93,7 +93,7 @@ CREATE TABLE `personal_access_tokens` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `roles`
+-- Tabellstruktur for tabell `roles`
 --
 
 CREATE TABLE `roles` (
@@ -102,7 +102,7 @@ CREATE TABLE `roles` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `roles`
+-- Dataark for tabell `roles`
 --
 
 INSERT INTO `roles` (`role_id`, `role_name`) VALUES
@@ -112,7 +112,7 @@ INSERT INTO `roles` (`role_id`, `role_name`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `sessions`
+-- Tabellstruktur for tabell `sessions`
 --
 
 CREATE TABLE `sessions` (
@@ -125,7 +125,7 @@ CREATE TABLE `sessions` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `sessions`
+-- Dataark for tabell `sessions`
 --
 
 INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
@@ -134,7 +134,7 @@ INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `time_slots`
+-- Tabellstruktur for tabell `time_slots`
 --
 
 CREATE TABLE `time_slots` (
@@ -151,23 +151,16 @@ CREATE TABLE `time_slots` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `time_slots`
+-- Dataark for tabell `time_slots`
 --
 
 INSERT INTO `time_slots` (`timeslot_id`, `tutor_id`, `date`, `start_time`, `end_time`, `location`, `description`, `booked_by`, `created_at`, `updated_at`) VALUES
-(1, 0, '2023-10-06', '09:00:00', '10:00:00', 'UIA', 'Hva som helst php relatert', NULL, NULL, '2023-11-14 11:28:32'),
-(2, 1, '2023-10-04', '11:00:00', '12:00:00', '48 113', 'Prosjekt', NULL, NULL, '2023-10-18 13:18:41'),
-(5, 0, '2023-10-12', '10:00:00', '11:00:00', 'B1 002', 'Prosjekt veildening', NULL, NULL, '2023-11-14 11:28:32'),
-(6, 1, '2023-10-19', '15:00:00', '16:00:00', 'B2 016', 'AWDAE', NULL, '2023-10-18 10:56:40', '2023-10-18 13:18:41'),
-(7, 1, '2023-10-16', '09:00:00', '10:00:00', '48 007a', 'JAVASCRIPT', NULL, '2023-10-18 11:01:07', '2023-11-14 11:28:32'),
-(8, 1, '2023-10-17', '10:00:00', '11:00:00', '50 116e', 'CSS', NULL, '2023-10-18 11:04:28', '2023-11-14 11:28:32'),
-(9, 1, '2023-10-20', '12:00:00', '01:00:00', '48 115', 'JQUERY', NULL, '2023-10-18 11:19:23', '2023-10-19 09:55:52'),
-(10, 1, '2023-10-13', '11:00:00', '12:00:00', 'uia', 'hgdfsdxfnm', NULL, '2023-10-19 07:19:12', '2023-10-19 07:19:12');
+(11, 10, '2023-11-30', '18:53:00', '07:53:00', '48 115', 'Laravel', NULL, '2023-11-30 16:53:28', '2023-11-30 16:53:28');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `users`
+-- Tabellstruktur for tabell `users`
 --
 
 CREATE TABLE `users` (
@@ -182,14 +175,14 @@ CREATE TABLE `users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `users`
+-- Dataark for tabell `users`
 --
 
 INSERT INTO `users` (`id`, `firstname`, `lastname`, `email`, `password`, `phone_number`, `role_id`, `created_at`) VALUES
 (4, 'Tester', 'Tester', 'tester@tester.no', '$2y$10$MX4TYdwBaTfgqny3uTKDCOSgjtIRj60cRYd0uNZibhlebpEj40iQi', '97382049', 1, NULL),
-(5, 'Tester', 'Tester', 'tester@tester.no', '$2y$10$PyC73pG2k3Nqt5JVVD4i9uIafW4UJDHFAqlBg70Wi1Dpzm5O7UAEi', '97382049', 1, NULL),
 (7, 'Cookie', 'Monster', 'cookie@monster.no', '$2y$10$EMx1A7.MpArEIeIt11FnCu8CPSfu8AozEEogbzg3DKWR/uiN42qH2', '497203957', 1, NULL),
-(9, 'test', 'tutor', 'test@tutor.no', '68eacb97d86f0c4621fa2b0e17cabd8c', '65439458784', 2, NULL);
+(9, 'test', 'tutor', 'test@tutor.no', '68eacb97d86f0c4621fa2b0e17cabd8c', '65439458784', 2, NULL),
+(10, 'Donald', 'Duck', 'donald@duck.moc', '$2y$10$KCD/PICREJmoKUFFDohCmegXQnfPK067d8kBDTjvN5PWXoiqoFWHe', '12345678', 2, NULL);
 
 --
 -- Indexes for dumped tables
@@ -234,13 +227,15 @@ ALTER TABLE `sessions`
 --
 ALTER TABLE `time_slots`
   ADD PRIMARY KEY (`timeslot_id`),
-  ADD KEY `fk_booked_by` (`booked_by`);
+  ADD KEY `fk_booked_by` (`booked_by`),
+  ADD KEY `fk_tutor_id` (`tutor_id`);
 
 --
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
   ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `email` (`email`),
   ADD KEY `role_id` (`role_id`);
 
 --
@@ -269,26 +264,27 @@ ALTER TABLE `roles`
 -- AUTO_INCREMENT for table `time_slots`
 --
 ALTER TABLE `time_slots`
-  MODIFY `timeslot_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `timeslot_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
--- Constraints for dumped tables
+-- Begrensninger for dumpede tabeller
 --
 
 --
--- Constraints for table `time_slots`
+-- Begrensninger for tabell `time_slots`
 --
 ALTER TABLE `time_slots`
-  ADD CONSTRAINT `fk_booked_by` FOREIGN KEY (`booked_by`) REFERENCES `users` (`id`) ON DELETE SET NULL;
+  ADD CONSTRAINT `fk_booked_by` FOREIGN KEY (`booked_by`) REFERENCES `users` (`id`) ON DELETE SET NULL,
+  ADD CONSTRAINT `fk_tutor_id` FOREIGN KEY (`tutor_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
 
 --
--- Constraints for table `users`
+-- Begrensninger for tabell `users`
 --
 ALTER TABLE `users`
   ADD CONSTRAINT `users_ibfk_1` FOREIGN KEY (`role_id`) REFERENCES `roles` (`role_id`);

@@ -26,7 +26,7 @@ echo "<div>
     echo "<input class='form-control' name='endTime' readonly type='text' value='". $timeSlot->end_time ."'>";
 
     echo "<label for='tutor'>Veileder tilstede:</label>";
-    echo "<input class='form-control' name='tutor' readonly type='text' value='". $timeSlot->tutor_name ."'>";
+    echo "<input class='form-control' name='tutor' readonly type='text' value='". $timeSlot -> tutor_fname . " " . $timeSlot -> tutor_lname ."'>";
 
     echo "<label for='location'>Sted:</label>";
     echo "<input class='form-control' name='location' readonly type='text' value='". $timeSlot->location ."'>";
@@ -36,7 +36,7 @@ echo "<div>
 
     if($timeSlot -> booked_by !== null){
         echo "<label for='bookedBy'>Booket av:</label>";
-        echo "<input class='form-control' name='bookedBy' readonly type='text' value='". $timeSlot->student_name ."'>";
+        echo "<input class='form-control' name='bookedBy' readonly type='text' value='". $timeSlot->student_fname . " " . $timeSlot -> student_lname ."'>";
     }
     echo "</form>";
 
@@ -52,6 +52,10 @@ echo "<div>
         echo "</form>";
     }
 
+    if($timeSlot -> tutor_id === $_SESSION["user"]["id"]){
+        echo "<form method='POST'>";
+        echo "<button class='btn btn-danger' name='delete' type='submit' value='" . $timeSlot -> timeslot_id . "'> Slett</button>";
+    }
     echo "</div>";
 ?>
 
