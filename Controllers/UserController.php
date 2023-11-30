@@ -5,6 +5,8 @@
     require(__DIR__ . "/../Tools/dbcon.php");
     require(__DIR__ . "/../Models/User.php");
 
+    $userModel = new User($pdo);
+
 
     if(isset($_POST["logIn"])){
 
