@@ -22,3 +22,4 @@ if (!defined('DB_NAME')) {
         echo "Server er under vedlikeholding";
         error_log($e);
     }
+}
