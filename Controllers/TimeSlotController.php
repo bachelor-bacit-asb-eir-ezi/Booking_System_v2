@@ -9,7 +9,14 @@ require_once(__DIR__ . "/../Tools/Validate.php");
 if(isset($_GET["changeWeek"])){
     $year =  $_GET["currentYear"];
     $weekNumber = $_GET["weekNumber"];
-
+    if($weekNumber > 52){
+        $weekNumber = 1;
+        $year++;
+    }
+    if($weekNumber < 1){
+        $weekNumber = 52;
+        $year--;
+    }
     $week = new Week($weekNumber,$year);
     $timeSlots = TimeSlot::getTimeSlots($weekNumber,$year);
     $week -> insertTimeSlots($timeSlots);
