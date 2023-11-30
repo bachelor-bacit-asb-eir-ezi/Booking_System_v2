@@ -29,7 +29,7 @@
 </head>
 <body>
     <?php
-    require(__DIR__ . "/../../Tools/dbcon.php");
+    require(__DIR__ . '/../../Controllers/UserController.php');
 
     if (isset($_POST['register'])) {
         // Samle inn data fra $_POST
