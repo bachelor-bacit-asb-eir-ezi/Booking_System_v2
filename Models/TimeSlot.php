@@ -6,7 +6,6 @@ require(__DIR__ . '/../tools/Validate.php');
 class TimeSlot{
     #La sin info
     public $tutorId;
-    public $tutorName;
 
     #annen info
     public $date;
@@ -14,10 +13,6 @@ class TimeSlot{
     public $endTime;
     public $location;
     public $description;
-
-    #Student som booket sin info: USIKER PÅ OM DEN TRENGS PGA PDO OBJECT
-    public $studentId; 
-    public $studentName;
 
 
     public static function saveTimeSlot(TimeSlot $timeslot){
@@ -58,7 +53,7 @@ class TimeSlot{
 
         global $pdo;
 
-        $sql = "SELECT timeslot_id, tutor_id, name AS tutor_name, time_slots.date, start_time, end_time, location, description, booked_by 
+        $sql = "SELECT timeslot_id, tutor_id, firstname AS tutor_fname, lastname AS tutor_lname, time_slots.date, start_time, end_time, location, description, booked_by 
         FROM time_slots 
         INNER JOIN users ON tutor_id = users.id
         WHERE time_slots.date >= :weekStart AND time_slots.date <= :weekEnd
@@ -89,14 +84,16 @@ class TimeSlot{
         $sanetizedID = Validate::sanitize($id);
 
         $sql = "SELECT timeslot_id, 
-                users_a.name AS tutor_name, 
+                users_a.firstname AS tutor_fname, 
+                users_a.lastname AS tutor_lname, 
                 tutor_id, date, 
                 start_time, 
                 end_time, 
                 location, 
                 description, 
                 booked_by, 
-                users_b.name AS student_name 
+                users_b.firstname AS student_fname, 
+                users_b.lastname AS student_lname 
             FROM time_slots 
             INNER JOIN users AS users_a 
                 ON users_a.id = tutor_id 
@@ -182,10 +179,23 @@ class TimeSlot{
     {
         global $pdo;
 
-        $sql = "SELECT timeslot_id, tutor_id, name AS tutor_name, date, start_time, end_time, location, description, booked_by 
-    FROM time_slots 
-    INNER JOIN users ON tutor_id = users.id
-    ORDER BY date, start_time;";
+        $sql = "SELECT timeslot_id, 
+            users_a.firstname AS tutor_fname, 
+            users_a.lastname AS tutor_lname, 
+            tutor_id, date, 
+            start_time, 
+            end_time, 
+            location, 
+            description, 
+            booked_by, 
+            users_b.firstname AS student_fname, 
+            users_b.lastname AS student_lname 
+        FROM time_slots 
+        INNER JOIN users AS users_a 
+            ON users_a.id = tutor_id 
+        LEFT JOIN users AS users_b 
+            ON booked_by = users_b.id
+        ORDER BY date, start_time";
 
         $query = $pdo->prepare($sql);
 

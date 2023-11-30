@@ -23,7 +23,7 @@ $timeSlots = TimeSlot::getAllTimeSlots();
             <div class="col-md-4 mb-4">
                 <div class="card h-100">
                     <div class="card-header">
-                        Veileder: <?= htmlspecialchars($timeSlot->tutor_name) ?>
+                        Veileder: <?= htmlspecialchars($timeSlot->tutor_fname) ?> <?= htmlspecialchars($timeSlot->tutor_lname) ?>
                     </div>
                     <ul class="list-group list-group-flush">
                         <li class="list-group-item">Dato: <?= htmlspecialchars($timeSlot->date) ?></li>
@@ -32,7 +32,7 @@ $timeSlots = TimeSlot::getAllTimeSlots();
                         <li class="list-group-item">Sted: <?= htmlspecialchars($timeSlot->location) ?></li>
                         <li class="list-group-item">Tema: <?= htmlspecialchars($timeSlot->description) ?></li>
                         <?php if ($timeSlot->booked_by): ?>
-                            <li class="list-group-item">Booket av: <?= htmlspecialchars($timeSlot->booked_by) ?></li>
+                            <li class="list-group-item">Booket av: <?= htmlspecialchars($timeSlot->student_fname) ?> <?= htmlspecialchars($timeSlot->student_lname) ?></li>
                         <?php endif; ?>
                     </ul>
                 </div>

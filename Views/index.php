@@ -40,6 +40,9 @@
                     <input type="submit" name="logIn" value="Logg Inn" class="btn btn-primary btn-block">
                 </div>
             </form>
+
+            <a href="./user/register.php" class="btn btn-link">Registrer deg</a>
+
             <?php
             if(isset($logOutMsg)){
                 echo "<div class='alert alert-warning'>$logOutMsg</div>";
