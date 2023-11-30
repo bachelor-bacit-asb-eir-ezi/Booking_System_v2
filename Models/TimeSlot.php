@@ -184,10 +184,23 @@ class TimeSlot{
     {
         global $pdo;
 
-        $sql = "SELECT timeslot_id, tutor_id, name AS tutor_name, date, start_time, end_time, location, description, booked_by 
-    FROM time_slots 
-    INNER JOIN users ON tutor_id = users.id
-    ORDER BY date, start_time;";
+        $sql = "SELECT timeslot_id, 
+            users_a.firstname AS tutor_fname, 
+            users_a.lastname AS tutor_lname, 
+            tutor_id, date, 
+            start_time, 
+            end_time, 
+            location, 
+            description, 
+            booked_by, 
+            users_b.firstname AS student_fname, 
+            users_b.lastname AS student_lname 
+        FROM time_slots 
+        INNER JOIN users AS users_a 
+            ON users_a.id = tutor_id 
+        LEFT JOIN users AS users_b 
+            ON booked_by = users_b.id
+        ORDER BY date, start_time";
 
         $query = $pdo->prepare($sql);
 
