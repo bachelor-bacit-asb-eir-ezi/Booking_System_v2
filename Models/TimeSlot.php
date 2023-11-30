@@ -6,7 +6,6 @@ require(__DIR__ . '/../tools/Validate.php');
 class TimeSlot{
     #La sin info
     public $tutorId;
-    public $tutorName;
 
     #annen info
     public $date;
@@ -14,10 +13,6 @@ class TimeSlot{
     public $endTime;
     public $location;
     public $description;
-
-    #Student som booket sin info: USIKER PÅ OM DEN TRENGS PGA PDO OBJECT
-    public $studentId; 
-    public $studentName;
 
 
     public static function saveTimeSlot(TimeSlot $timeslot){
