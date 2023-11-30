@@ -11,7 +11,7 @@
         $email = Validate::sanitize($_POST["email"]);
         $password = Validate::sanitize($_POST["password"]);
 
-        $sql = "SELECT users.id, users.name, email, phone_number, users.password, role_name 
+        $sql = "SELECT users.id, users.firstname, users.lastname, email, phone_number, users.password, role_name 
         FROM users 
         INNER JOIN roles ON users.role_id = roles.role_id  WHERE email = :email";
 
