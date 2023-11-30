@@ -53,31 +53,31 @@ echo "</div>";
 <script>
  function updateTimeSlotInCalender() 
     {
+        //Finn calender
         var calender = document.getElementById("calender");
         var xhr = new XMLHttpRequest();
 
-        // Get the current URL
+        //Henter nåværende url
         var currentUrl = window.location.href;
 
-        // Use the URLSearchParams API to extract parameters from the URL
+        // Henter alt etter ?
         var urlParams = new URLSearchParams(currentUrl.split("?")[1]);
 
-        // Extract year and weekNumber from the URL parameters
+        // Henter ukenummer og år fra url 
         var currentYear = urlParams.get("currentYear");
         var weekNumber = urlParams.get("weekNumber");
 
        
-        // Replace 'your_script.php' with the actual path to your PHP script
+        // Sti til fil som skal kontaktes
         var url = "../../Tools/CalenderGenerator.php";
 
-        // Parameters to be sent in the GET request
         
-        if (weekNumber != null || currentYear != null){ //Plaeholder, bør utvides til å sjekke hvis en mangler fyll inn den andre
+        //Hvis verider ikke finnes hindre at det blir feilmelding
+        if (weekNumber != null || currentYear != null){ 
             var params = "changeWeek=true&currentYear=" + currentYear + "&weekNumber=" + weekNumber;
         } else{
             var params = "";
         }
-        console.log(params);
         xhr.open("GET", url + "?" + params, true);
 
         xhr.onreadystatechange = function() {
@@ -89,7 +89,9 @@ echo "</div>";
 
         xhr.send();
     }
+    //Kjøres når siden åprnes
     updateTimeSlotInCalender();
+    //kjøres derreter hvert 5 sekund
     setInterval(updateTimeSlotInCalender, 5000);
 </script>
 
