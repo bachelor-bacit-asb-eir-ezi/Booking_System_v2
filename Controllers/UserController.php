@@ -5,13 +5,15 @@
     require(__DIR__ . "/../Tools/dbcon.php");
     require(__DIR__ . "/../Models/User.php");
 
+    $userModel = new User($pdo);
+
 
     if(isset($_POST["logIn"])){
 
         $email = Validate::sanitize($_POST["email"]);
         $password = Validate::sanitize($_POST["password"]);
 
-        $sql = "SELECT users.id, users.firstname, users.lastname, email, phone_number, users.password, role_name 
+        $sql = "SELECT users.id, users.firstname AS fname, users.lastname AS lname, email, phone_number, users.password, role_name 
         FROM users 
         INNER JOIN roles ON users.role_id = roles.role_id  WHERE email = :email";
 
@@ -32,7 +34,8 @@
         if(!$user == null && password_verify($password, $user -> password)){
             $_SESSION['user']['id'] = $user -> id;
             $_SESSION['user']['email'] = $user -> email;
-            $_SESSION['user']['name'] = $user -> name;
+            $_SESSION['user']['fname'] = $user -> fname;
+            $_SESSION['user']['lname'] = $user -> lname;
             $_SESSION['user']['phone'] = $user -> phone_number;
             $_SESSION['user']['role'] = $user -> role_name;
             $_SESSION['user']['logedIn'] = true;

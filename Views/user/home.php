@@ -19,7 +19,7 @@ echo '<div class="container mt-8">
                 <h5 class="card-title">Min profil</h5>
                 <h6 class="card-subtitle mb-2 text-muted">User ID: ' . htmlspecialchars($_SESSION["user"]["id"]) . '</h6>
                 <p class="card-text">Email: ' . htmlspecialchars($_SESSION["user"]["email"]) . '</p>
-                <p class="card-text">Navn: ' . htmlspecialchars($_SESSION["user"]["name"]) . '</p>
+                <p class="card-text">Navn: ' . htmlspecialchars($_SESSION["user"]["fname"]) . " " . htmlspecialchars($_SESSION["user"]["lname"]) . '</p>
                 <p class="card-text">Telefonnummer: ' . htmlspecialchars($_SESSION["user"]["phone"]) . '</p>
                 <p class="card-text">Rolle: ' . htmlspecialchars($_SESSION["user"]["role"]) . '</p>
                 
