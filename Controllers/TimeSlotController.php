@@ -6,20 +6,18 @@ require_once(__DIR__ . "/../Models/Week.php");
 require_once(__DIR__ . "/../Tools/Validate.php");
 
 #Calender endre uke
-if(isset($_POST["changeWeek"])){
-    $year =  $_POST["currentYear"];
-    switch ($_POST["typeOfChange"]) {
+if(isset($_GET["changeWeek"])){
+    $year =  $_GET["currentYear"];
+    switch ($_GET["changeWeek"]) {
         case "nextWeek":
-            $weekNumber = $_POST["weekNumber"];
-            $weekNumber++;
+            $weekNumber = $_GET["weekNumber"];
             if ($weekNumber > 52){
                 $year ++;
                 $weekNumber = 1;
             }
             break;
         case "prevWeek":
-            $weekNumber = $_POST["weekNumber"];
-            $weekNumber--;
+            $weekNumber = $_GET["weekNumber"];
             if ($weekNumber < 1){
                 $year --;
                 $weekNumber = 52;
@@ -27,7 +25,7 @@ if(isset($_POST["changeWeek"])){
             break;
         case "searchWeek":
             #for å forhindre at bruker kan søke på ukenummer høyere en mulig eller lavere (0 < weekNumber < 53)
-            switch ($weekNumber = $_POST["weekNumber"]){
+            switch ($weekNumber = $_GET["weekNumber"]){
                 case $weekNumber < 1:
                     $weekNumber = 1;
                     break;
@@ -35,20 +33,20 @@ if(isset($_POST["changeWeek"])){
                     $weekNumber = 52;
                     break;
                 default:
-                    $weekNumber = $_POST["weekNumber"];
+                    $weekNumber = $_GET["weekNumber"];
                     break;
             }
             break;
     }
     $week = new Week($weekNumber,$year);
-    $timeSlots = TimeSlot::getTimeSlots($weekNumber);
+    $timeSlots = TimeSlot::getTimeSlots($weekNumber,$year);
     $week -> insertTimeSlots($timeSlots);
 } else {
     $weekNumber = date("W");
     $year = date("Y");
 
     $week = new Week($weekNumber,$year);
-    $timeSlots = TimeSlot::getTimeSlots($weekNumber);
+    $timeSlots = TimeSlot::getTimeSlots($weekNumber,$year);
     $week -> insertTimeSlots($timeSlots);
 }
 
@@ -71,11 +69,6 @@ if (isset($_POST["createTimeSlot"])){
     exit;
 }
 
-#Show info om time slot
-if (isset($_GET["showTimeSlotInfo"])){
-    header("location: show.php");
-    exit;
-}
 
 #Book og unbook timeslot
 if (isset($_POST["bookTimeSlot"])){
@@ -86,6 +79,13 @@ if (isset($_POST["bookTimeSlot"])){
 
 if (isset($_POST["unBookTimeSlot"])){
     TimeSlot::unBookTimeSlot($_POST["timeSlotId"]);
+    header("location: ../timeSlot/calender.php");
+    exit;
+}
+
+if (isset($_POST["delete"])){
+    $id = Validate::sanitize($_POST["delete"]);
+    TimeSlot::delTimeSlot($id);
     header("location: ../timeSlot/calender.php");
     exit;
 }

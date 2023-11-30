@@ -1,5 +1,6 @@
 <?php 
 require(__DIR__ . '/../tools/dbcon.php');
+require(__DIR__ . '/../tools/Validate.php');
 
 
 class TimeSlot{
@@ -38,18 +39,26 @@ class TimeSlot{
             #Sjekker om sql statement er skrevet korrekt
             $query -> execute();
         } catch (PDOException $e){
-            echo $e; //Bør logges istedenfor skrevet ut, sikkerhets risiko
+            echo "En feil oppstod";
+            error_log($e);
         }
     }
 
-    public static function getTimeSlots($weekNumber){
-        $day = date($weekNumber);
-        $weekStart = date('Y-m-d', strtotime('-'.$day.' days'));
-        $weekEnd = date('Y-m-d', strtotime('+'.(6-$day).' days'));
+    public static function getTimeSlots($weekNumber,$year){
+        #Finner dato, bruker mandag som første dag og søndag som site dag
+        $weekStart = new DateTime();
+        $weekStart->setISODate($year, $weekNumber, 1); 
+
+        $weekEnd = clone $weekStart;
+        $weekEnd->modify('+6 days');
+
+        #Gjør de til string for at de skal bli akseptert i bindparem
+        $weekStart =  $weekStart -> format("Y-m-d");
+        $weekEnd = $weekEnd -> format("Y-m-d");
 
         global $pdo;
 
-        $sql = "SELECT timeslot_id, name AS tutor_name, time_slots.date, start_time, end_time, location, description, booked_by 
+        $sql = "SELECT timeslot_id, tutor_id, name AS tutor_name, time_slots.date, start_time, end_time, location, description, booked_by 
         FROM time_slots 
         INNER JOIN users ON tutor_id = users.id
         WHERE time_slots.date >= :weekStart AND time_slots.date <= :weekEnd
@@ -63,9 +72,10 @@ class TimeSlot{
             #Sjekker om sql statement er skrevet korrekt
             $query -> execute();
         } catch (PDOException $e){
-            echo $e; //Bør logges istedenfor skrevet ut, sikkerhets risiko
+            echo "En feil oppstod";
+            error_log($e);
         }
-
+        $timeslots = array();
         #Så lenge den henter rows skal while løkken kjøre, stopper når det ikke er flere rows å hente
         while ($row = $query->fetch(PDO::FETCH_OBJ)) {
             $timeslots[] = $row; 
@@ -75,7 +85,9 @@ class TimeSlot{
 
     public static function getTimeSlotDetails($id){
         global $pdo;
-        
+
+        $sanetizedID = Validate::sanitize($id);
+
         $sql = "SELECT timeslot_id, 
                 users_a.name AS tutor_name, 
                 tutor_id, date, 
@@ -93,13 +105,14 @@ class TimeSlot{
             WHERE timeslot_id = :timeslot_id";
 
         $query = $pdo -> prepare($sql);
-        $query -> bindParam(":timeslot_id", $id);
+        $query -> bindParam(":timeslot_id", $sanetizedID);
 
         try{
             #Sjekker om sql statement er skrevet korrekt
             $query -> execute();
         } catch (PDOException $e){
-            echo $e; //Bør logges istedenfor skrevet ut, sikkerhets risiko
+            echo "En feil oppstod";
+            error_log($e);
         }
 
         $timeslot = $query -> fetch(PDO::FETCH_OBJ);
@@ -122,7 +135,8 @@ class TimeSlot{
             #Sjekker om sql statement er skrevet korrekt
             $query -> execute();
         } catch (PDOException $e){
-            echo $e; //Bør logges istedenfor skrevet ut, sikkerhets risiko
+            echo "En feil oppstod";
+            error_log($e);
         }
     }
 
@@ -140,8 +154,50 @@ class TimeSlot{
             #Sjekker om sql statement er skrevet korrekt
             $query -> execute();
         } catch (PDOException $e){
-            echo $e; //Bør logges istedenfor skrevet ut, sikkerhets risiko
+            echo "En feil oppstod";
+            error_log($e);
         }
     }
-}
-?>
+
+    public static function delTimeSlot($id){
+        global $pdo;
+
+        $sql = "DELETE FROM time_slots
+            WHERE timeslot_id = :timeslot_id";
+
+        $query = $pdo -> prepare($sql);
+        #Id blir sanetized før levert til metoden
+        $query -> bindParam(":timeslot_id", $id);
+
+        try{
+            #Sjekker om sql statement er skrevet korrekt
+            $query -> execute();
+        } catch (PDOException $e){
+            echo "En feil oppstod";
+            error_log($e);
+        }
+    }
+    //Henter alle "slotsene" brukt til ledige/booket timer
+    public static function getAllTimeSlots()
+    {
+        global $pdo;
+
+        $sql = "SELECT timeslot_id, tutor_id, name AS tutor_name, date, start_time, end_time, location, description, booked_by 
+    FROM time_slots 
+    INNER JOIN users ON tutor_id = users.id
+    ORDER BY date, start_time;";
+
+        $query = $pdo->prepare($sql);
+
+        try {
+            $query->execute();
+            $timeslots = $query->fetchAll(PDO::FETCH_OBJ);
+            return $timeslots;
+        } catch (PDOException $e) {
+            echo "En feil oppstod";
+            error_log($e);
+            return [];
+            }
+        }
+    }
+        ?>

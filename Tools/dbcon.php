@@ -13,13 +13,12 @@ if (!defined('DB_PASS')) {
 
 if (!defined('DB_NAME')) {
     define('DB_NAME', 'bookingsystemdb');
-}
 
-$dsn = 'mysql:dbname=' . DB_NAME . ';host=' . DB_HOST;
+    $dsn = 'mysql:dbname=' . DB_NAME . ';host=' . DB_HOST; // Driver settes her
 
-try {
-    $pdo = new PDO($dsn, DB_USER, DB_PASS);
-} catch (PDOException $e) {
-    echo "Error connecting to database: " . $e->getMessage();
-}
-?>
+    try {
+        $pdo = new PDO($dsn, DB_USER, DB_PASS);
+    } catch (PDOException $e) {
+        echo "Server er under vedlikeholding";
+        error_log($e);
+    }

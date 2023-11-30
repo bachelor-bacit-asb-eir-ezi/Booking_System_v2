@@ -10,7 +10,8 @@ if (!$_SESSION["user"]["logedIn"]){
 
 #Må gjøres: sjekk om bruker er student som booket time
 
-$timeSlot = TimeSlot::getTimeSlotDetails($_GET["timeSlotId"]);
+$timeSlotId = Validate::sanitize($_GET["timeSlotId"]);
+$timeSlot = TimeSlot::getTimeSlotDetails($timeSlotId);
 
 
 echo "<div>
