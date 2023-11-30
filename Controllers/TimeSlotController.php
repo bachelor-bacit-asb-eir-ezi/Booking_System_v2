@@ -8,43 +8,15 @@ require_once(__DIR__ . "/../Tools/Validate.php");
 #Calender endre uke
 if(isset($_GET["changeWeek"])){
     $year =  $_GET["currentYear"];
-    switch ($_GET["changeWeek"]) {
-        case "nextWeek":
-            $weekNumber = $_GET["weekNumber"];
-            if ($weekNumber > 52){
-                $year ++;
-                $weekNumber = 1;
-            }
-            break;
-        case "prevWeek":
-            $weekNumber = $_GET["weekNumber"];
-            if ($weekNumber < 1){
-                $year --;
-                $weekNumber = 52;
-            }
-            break;
-        case "searchWeek":
-            #for å forhindre at bruker kan søke på ukenummer høyere en mulig eller lavere (0 < weekNumber < 53)
-            switch ($weekNumber = $_GET["weekNumber"]){
-                case $weekNumber < 1:
-                    $weekNumber = 1;
-                    break;
-                case $weekNumber > 52:
-                    $weekNumber = 52;
-                    break;
-                default:
-                    $weekNumber = $_GET["weekNumber"];
-                    break;
-            }
-            break;
-    }
+    $weekNumber = $_GET["weekNumber"];
+
     $week = new Week($weekNumber,$year);
     $timeSlots = TimeSlot::getTimeSlots($weekNumber,$year);
     $week -> insertTimeSlots($timeSlots);
-} else {
+} else{
     $weekNumber = date("W");
     $year = date("Y");
-
+    
     $week = new Week($weekNumber,$year);
     $timeSlots = TimeSlot::getTimeSlots($weekNumber,$year);
     $week -> insertTimeSlots($timeSlots);
