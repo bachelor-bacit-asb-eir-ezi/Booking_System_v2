@@ -10,8 +10,8 @@
     }
 
     if ($_SESSION["user"]["role"] !== "tutor"){
-        $_SESSION["msg"] = "Du har ikke tilgang til den siden";
-        header("location: ../user/home.php");
+        $_SESSION["msg"] = "Som student har du ikke tilgang til å opprette veiledningstimer";
+        header("location: ../user/deniedAccess.php");
         exit;
     }
 ?>
