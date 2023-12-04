@@ -1,36 +1,45 @@
 <?php
 require(__DIR__ . '/../tools/dbcon.php');
 
-class User
-{
-    private $pdo;
+class User {
 
-    public function __construct(PDO $pdo)
+    public $id;
+    public $firstname;
+    public $lastname;
+    public $email;
+    public $password;
+    public $phone_number;
+
+    public static function registerUser(User $user)
     {
-        $this->pdo = $pdo;
-    }
+        global $pdo;
 
-    public function registerUser($firstname, $lastname, $email, $password, $phone_number)
-    {
-        $name = $firstname . ' ' . $lastname;
-        $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+        $sql = "INSERT INTO users (firstname, lastname, email, password, phone_number)
+                VALUES (:firstname, :lastname, :email, :password, :phone_number)";
 
-        $sql = "INSERT INTO users (name, email, password, phone_number) 
-                VALUES (:name, :email, :password, :phone_number)";
+        $query = $pdo->prepare($sql);
 
-        $stmt = $this->pdo->prepare($sql);
+        $query->bindParam(':firstname', $user -> firstname);
+        $query->bindParam(':lastname', $user -> lastname);
+        $query->bindParam(':email', $user -> email);
+        $query->bindParam(':password', $user -> password);
+        $query->bindParam(':phone_number', $user -> phone_number);
 
-        $stmt->bindParam(":name", $name, PDO::PARAM_STR);
-        $stmt->bindParam(":email", $email, PDO::PARAM_STR);
-        $stmt->bindParam(":password", $hashedPassword, PDO::PARAM_STR);
-        $stmt->bindParam(":phone_number", $phone_number, PDO::PARAM_STR);
-
-        try {
-            $stmt->execute();
-            return true;
-        } catch (PDOException $e) {
-            return false; 
+        try{
+            #Sjekker om sql statement er skrevet korrekt
+            $query -> execute();
+        } catch (PDOException $e){
+            echo "En feil oppstod";
+            error_log("PDOException: " . $e -> getMessage());
         }
+
+        if ($pdo->lastInsertId()) {
+            // Registrering vellykket, send bruker til index.php
+                return true;
+            } else {
+                return false;
+            }
     }
+
 }
 ?>

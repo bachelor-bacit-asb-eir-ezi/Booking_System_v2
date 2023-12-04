@@ -41,7 +41,7 @@ if (isset($_POST["createTimeSlot"])){
     $timeSlot -> location = Validate::sanitize($_POST["location"]);
     $timeSlot -> description = Validate::sanitize($_POST["description"]);
 
-    TimeSlot::saveTimeSlot($timeSlot);
+    TimeSlot::createTimeSlot($timeSlot);
 
     unset($timeSlot);
     header("location: calender.php");
