@@ -30,7 +30,6 @@
         }
 
         $user = $sp -> fetch(PDO::FETCH_OBJ);
-        print_r($user);
 
         if(!$user == null && password_verify($password, $user -> password)){
             $_SESSION['user']['id'] = $user -> id;
