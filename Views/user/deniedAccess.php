@@ -2,8 +2,8 @@
 <?php 
 session_start();
 
-if (!$_SESSION["user"]["logedIn"]) {
-    header("location: index.php");
+if (!$_SESSION["user"]["logedIn"]){
+    header("location: ../index.php");
     exit;
 }
 ?>

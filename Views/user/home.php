@@ -3,8 +3,8 @@
 <?php
     require(__DIR__ . "/../../Controllers/UserController.php");
 
-    if (!$_SESSION["user"]["logedIn"]) {
-        header("location: index.php");
+    if (!$_SESSION["user"]["logedIn"]){
+        header("location: ../index.php");
         exit;
     }
 echo '<div class="container mt-8">
