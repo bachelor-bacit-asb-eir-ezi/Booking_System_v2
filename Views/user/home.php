@@ -3,12 +3,6 @@
 <?php
     require(__DIR__ . "/../../Controllers/UserController.php");
 
-    #Hvis unset ikke blir gjort før login check vil msg vises når ny bruker logger in
-    if(isset($_SESSION["msg"])){
-        $msg = $_SESSION["msg"];
-        unset($_SESSION["msg"]);
-    }
-
     if (!$_SESSION["user"]["logedIn"]) {
         header("location: index.php");
         exit;
@@ -28,11 +22,4 @@ echo '<div class="container mt-8">
       </div>';
 ?>
 
-
-<?php 
-if(isset($msg)){
-    echo $msg;
-    unset($msg);
-}
-?>
 <?php include(__DIR__ . "/../layout/footer.php")?>

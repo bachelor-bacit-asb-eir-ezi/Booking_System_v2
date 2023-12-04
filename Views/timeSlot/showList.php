@@ -10,8 +10,8 @@ require_once(__DIR__ . "/../../Controllers/TimeSlotController.php");
     }
     //Admin-tilgang
     if ($_SESSION["user"]["role"] !== "tutor"){
-        $_SESSION["msg"] = "Du har ikke tilgang til den siden";
-        header("location: ../user/home.php");
+        $_SESSION["msg"] = "Som student har du ikke tilgang til denne siden";
+        header("location: ../user/deniedAccess.php");
         exit;
     }
 $timeSlots = TimeSlot::getAllTimeSlots();
