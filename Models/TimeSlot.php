@@ -15,9 +15,7 @@ class TimeSlot{
     public $description;
 
 
-
-
-    public static function saveTimeSlot(TimeSlot $timeslot){
+    public static function createTimeSlot(TimeSlot $timeslot){
         
         global $pdo;
         

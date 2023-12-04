@@ -31,48 +31,8 @@
     <?php
     require(__DIR__ . '/../../Controllers/UserController.php');
 
-    if (isset($_POST['register'])) {
-        // Samle inn data fra $_POST
-        $firstname = $_POST['firstname'];
-        $lastname = $_POST['lastname'];
-        $email = $_POST['email'];
-        $password = password_hash($_POST['password'], PASSWORD_BCRYPT);
-        $phone_number = $_POST['phone_number'];
+    
 
-        $user = array(
-            'firstname' => $firstname,
-            'lastname' => $lastname,
-            'email' => $email,
-            'password' => $password,
-            'phone_number' => $phone_number
-        );
-
-        $sql = "INSERT INTO users (firstname, lastname, email, password, phone_number)
-                VALUES (:firstname, :lastname, :email, :password, :phone_number)";
-
-        // Gjør klar SQL-spørringen
-        $stmt = $pdo->prepare($sql);
-
-        $stmt->bindParam(':firstname', $firstname, PDO::PARAM_STR);
-        $stmt->bindParam(':lastname', $lastname, PDO::PARAM_STR);
-        $stmt->bindParam(':email', $email, PDO::PARAM_STR);
-        $stmt->bindParam(':password', $password, PDO::PARAM_STR);
-        $stmt->bindParam(':phone_number', $phone_number, PDO::PARAM_STR);
-
-        try {
-        $stmt->execute();
-        } catch (PDOException $e) {
-        echo $e ->getMessage();
-        }
-
-        if ($pdo->lastInsertId()) {
-        // Registrering vellykket, send bruker til index.php
-            header("Location: ../index.php");
-            exit();
-        } else {
-            echo "Noe gikk galt";
-        }
-    }
     ?>
 
     <div class="container mt-5">
