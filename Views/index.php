@@ -24,6 +24,10 @@
                 $logOutMsg = $_SESSION["logOutMsg"];
                 unset($_SESSION["logOutMsg"]);
             }
+            if (isset($_SESSION["registerMsg"])) {
+                $registerMsg = $_SESSION["registerMsg"];
+                unset($_SESSION["registerMsg"]);
+            }
             ?>
             <form method="POST" class="p-4">
                 <div class="form-group">
@@ -46,6 +50,9 @@
             <?php
             if(isset($logOutMsg)){
                 echo "<div class='alert alert-warning'>$logOutMsg</div>";
+            }
+            if(isset($registerMsg)){
+                echo "<div class='alert alert-primary'>$registerMsg</div>";
             }
             ?>
         </div>

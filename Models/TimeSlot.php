@@ -15,6 +15,8 @@ class TimeSlot{
     public $description;
 
 
+
+
     public static function saveTimeSlot(TimeSlot $timeslot){
         
         global $pdo;
@@ -35,7 +37,7 @@ class TimeSlot{
             $query -> execute();
         } catch (PDOException $e){
             echo "En feil oppstod";
-            error_log($e);
+            error_log("PDOException: " . $e -> getMessage());
         }
     }
 
