@@ -1,5 +1,6 @@
 <?php
 require(__DIR__ . '/../tools/dbcon.php');
+require(__DIR__ . '/../tools/Logger.php');
 
 class User {
 
