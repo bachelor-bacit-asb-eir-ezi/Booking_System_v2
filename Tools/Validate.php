@@ -13,24 +13,28 @@
                 return true;
             }
         }
-        
+
         public static function validateMobileNr(string $mobilNr){
-            if (preg_match('/^[0-9]{8}+$/',$mobilNr)){
-                return true;
-            } else{
+            if (preg_match('/[a-zA-Z]/', $mobilNr)){
+                return false;
+            }
+            if (preg_match('/^[0-9]{8}$/', $mobilNr)) {
+                return true; // Return false if any letters are found
+            }
+            else{
                 return false;
             }
         }
-        
+
         public static function validatePassword(string $password){
             if(strlen($password) <= 7 ){
                 return false;
             }
-            if(!preg_match('@[A-Z]@', $password) || !preg_match('@[a-z]@', $password) || !preg_match('@[0-8]@',$password)){
+            if(!preg_match('@[A-Z]@', $password) || !preg_match('@[a-z]@', $password) || !preg_match('@[0-9]@',$password)){
                 return false;
             }
             return true;
         }
-    
+
     }
 ?>
