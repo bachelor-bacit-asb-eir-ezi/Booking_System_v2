@@ -46,6 +46,7 @@
     if (isset($_POST["register"])) {
 
         $user = new User();
+        $errorMessage = "";
 
         $user -> firstname = Validate::sanitize($_POST["firstname"]);
         $user -> lastname = Validate::sanitize($_POST["lastname"]);
@@ -53,7 +54,27 @@
         $user -> password = password_hash(Validate::sanitize($_POST["password"]), PASSWORD_DEFAULT);
         $user -> phone_number = Validate::sanitize($_POST["phone_number"]);
     
-        $registrationResult = User::registerUser($user);
+        $emailValid = Validate::validateEmail($user -> email);
+        $phoneValid = Validate::validateMobileNr($user -> phone_number);
+        $passwordValid = Validate::validatePassword($user -> password);
+
+        if (!$emailValid) {
+            $errorMessage .= "<p class='alert alert-danger'>Eposten er ikke gyldig.</p>";
+        }
+        if (!$phoneValid) {
+            $errorMessage .= "<p class='alert alert-danger'>Telefonnummeret er ikke gyldig. Det må være 8 sifre.</p>";
+        }
+        if (!$passwordValid) {
+            $errorMessage .= "<p class='alert alert-danger'>Passordet er ikke gyldig. Det må være over 7 tegn, inneholde minst en stor bokstav, en liten bokstav og et tall (0-9).</p>";
+        }
+
+        if ($errorMessage == ""){
+            $registrationResult = User::registerUser($user);
+        } else{
+            $_SESSION['errorMessage'] = $errorMessage;
+            header("Location: register.php");
+            exit();
+        }
     
         if ($registrationResult) {
             $_SESSION['registerMsg'] = "Du har registrert deg!"; // Melding som sier at registrering var vellyket

@@ -30,9 +30,6 @@
 <body>
     <?php
     require(__DIR__ . '/../../Controllers/UserController.php');
-
-    
-
     ?>
 
     <div class="container mt-5">
@@ -72,6 +69,12 @@
 
                     <button name="register" type="submit" class="btn btn-primary">Registrer</button>
                 </form>
+                <?php
+                    if(isset($_SESSION["errorMessage"])){
+                        echo $_SESSION["errorMessage"];
+                        unset($_SESSION["errorMessage"]);
+                    }
+                ?>
             </div>
         </div>
     </div>
