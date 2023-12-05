@@ -48,15 +48,15 @@
         $user = new User();
         $errorMessage = "";
 
+        $emailValid = Validate::validateEmail($_POST["email"]);
+        $phoneValid = Validate::validateMobileNr($_POST["phone_number"]);
+        $passwordValid = Validate::validatePassword($_POST["password"]);
+
         $user -> firstname = Validate::sanitize($_POST["firstname"]);
         $user -> lastname = Validate::sanitize($_POST["lastname"]);
         $user -> email = Validate::sanitize($_POST["email"]);
-        $user -> password = password_hash(Validate::sanitize($_POST["password"]), PASSWORD_DEFAULT);
         $user -> phone_number = Validate::sanitize($_POST["phone_number"]);
-    
-        $emailValid = Validate::validateEmail($user -> email);
-        $phoneValid = Validate::validateMobileNr($user -> phone_number);
-        $passwordValid = Validate::validatePassword($user -> password);
+        $user -> password = password_hash(Validate::sanitize($_POST["password"]), PASSWORD_DEFAULT);
 
         if (!$emailValid) {
             $errorMessage .= "<p class='alert alert-danger'>Eposten er ikke gyldig.</p>";
