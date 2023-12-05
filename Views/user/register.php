@@ -8,9 +8,7 @@
 </head>
 <body>
     <?php
-
     require_once(__DIR__ . '/../../Controllers/UserController.php');
-
     ?>
 
     <div class="container mt-5">
