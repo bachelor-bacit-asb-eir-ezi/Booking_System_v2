@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 30. Nov, 2023 17:57 PM
+-- Generation Time: 05. Des, 2023 13:08 PM
 -- Tjener-versjon: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -155,7 +155,18 @@ CREATE TABLE `time_slots` (
 --
 
 INSERT INTO `time_slots` (`timeslot_id`, `tutor_id`, `date`, `start_time`, `end_time`, `location`, `description`, `booked_by`, `created_at`, `updated_at`) VALUES
-(11, 10, '2023-11-30', '18:53:00', '07:53:00', '48 115', 'Laravel', NULL, '2023-11-30 16:53:28', '2023-11-30 16:53:28');
+(12, 10, '2023-11-30', '12:08:00', '01:08:00', 'uia', 'Laravel', NULL, '2023-11-30 17:08:09', '2023-11-30 17:34:11'),
+(13, 10, '2023-11-28', '20:24:00', '09:24:00', 'UIA', 'AWDAE', 11, '2023-11-30 17:24:12', '2023-11-30 17:54:01'),
+(14, 10, '2023-11-22', '22:33:00', '11:33:00', '48 115', 'Php', NULL, '2023-11-30 17:33:35', '2023-11-30 17:33:35'),
+(15, 10, '2023-11-23', '20:34:00', '09:34:00', 'UIA', 'Laravel', NULL, '2023-11-30 17:34:31', '2023-11-30 17:34:31'),
+(16, 10, '2023-12-14', '09:02:00', '10:02:00', 'Digitlat', 'Modul 1', 13, '2023-12-04 14:03:35', '2023-12-05 11:17:38'),
+(17, 10, '2023-12-14', '11:03:00', '12:03:00', 'Digitalt', 'JAVASCRIPT', NULL, '2023-12-04 14:04:02', '2023-12-04 14:04:02'),
+(18, 12, '2023-12-12', '15:00:00', '04:00:00', 'B2 017', 'Modul Godkjening', NULL, '2023-12-04 14:06:42', '2023-12-05 10:40:39'),
+(19, 12, '2023-12-13', '12:13:00', '01:13:00', 'uia', 'Veiledningstime', NULL, '2023-12-05 11:16:53', '2023-12-05 11:16:53'),
+(20, 12, '2023-12-14', '10:00:00', '11:00:00', 'B2 017', 'Veiledningstime', NULL, '2023-12-05 11:17:20', '2023-12-05 11:17:20'),
+(21, 10, '2023-12-12', '12:00:00', '01:00:00', 'uia', 'Hjelp i PHP', NULL, '2023-12-05 11:18:38', '2023-12-05 11:18:38'),
+(22, 10, '2023-12-15', '14:00:00', '03:00:00', 'Digitalt', 'Veiledningstime', 11, '2023-12-05 11:19:52', '2023-12-05 11:22:12'),
+(24, 12, '2023-12-15', '13:05:00', '02:05:00', 'Digitalt', 'Veiledningstime', NULL, '2023-12-05 11:21:43', '2023-12-05 11:21:43');
 
 -- --------------------------------------------------------
 
@@ -182,7 +193,11 @@ INSERT INTO `users` (`id`, `firstname`, `lastname`, `email`, `password`, `phone_
 (4, 'Tester', 'Tester', 'tester@tester.no', '$2y$10$MX4TYdwBaTfgqny3uTKDCOSgjtIRj60cRYd0uNZibhlebpEj40iQi', '97382049', 1, NULL),
 (7, 'Cookie', 'Monster', 'cookie@monster.no', '$2y$10$EMx1A7.MpArEIeIt11FnCu8CPSfu8AozEEogbzg3DKWR/uiN42qH2', '497203957', 1, NULL),
 (9, 'test', 'tutor', 'test@tutor.no', '68eacb97d86f0c4621fa2b0e17cabd8c', '65439458784', 2, NULL),
-(10, 'Donald', 'Duck', 'donald@duck.moc', '$2y$10$KCD/PICREJmoKUFFDohCmegXQnfPK067d8kBDTjvN5PWXoiqoFWHe', '12345678', 2, NULL);
+(10, 'Donald', 'Duck', 'donald@duck.moc', '$2y$10$KCD/PICREJmoKUFFDohCmegXQnfPK067d8kBDTjvN5PWXoiqoFWHe', '12345678', 2, NULL),
+(11, 'Herring', 'Silden', 'herring@silden.moc', '$2y$10$vWan7paJFwiPnflyZbkSlOXMR0.dhBgInz7jqOsfL.D.6bOaPVTB.', '87654321', 1, NULL),
+(12, 'Karl', 'Johan', 'karl@bernadotte.se', '$2y$10$f9d6LYLu6lltUaKOCao4iuXEeNLRgJqrkiWOkzeXXJ59EVoNUKUBe', '67451232', 2, NULL),
+(13, 'Cola', 'Coca', 'coca@cola.moc', '$2y$10$sT2v.IhW282J.KXaLq6y2.dH1wusg68KEsDf7wbLHxMkOJ8V5xXxm', '98872323', 1, NULL),
+(14, 'Lars', 'Gunnar', 'lars@gunnar.moc', '$2y$10$ldV8PBTSJ7Rw/y8mDsklneQFh3IMnLBcf8nRKmbZG3Ckgn7fwzJ3C', '12345678', 1, NULL);
 
 --
 -- Indexes for dumped tables
@@ -264,13 +279,13 @@ ALTER TABLE `roles`
 -- AUTO_INCREMENT for table `time_slots`
 --
 ALTER TABLE `time_slots`
-  MODIFY `timeslot_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `timeslot_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- Begrensninger for dumpede tabeller
