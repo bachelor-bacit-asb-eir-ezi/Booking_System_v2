@@ -1,5 +1,6 @@
 <?php
 require(__DIR__ . '/../tools/dbcon.php');
+require(__DIR__ . '/../tools/Logger.php');
 
 class User {
 
@@ -29,8 +30,7 @@ class User {
             #Sjekker om sql statement er skrevet korrekt
             $query -> execute();
         } catch (PDOException $e){
-            echo "En feil oppstod";
-            error_log("PDOException: " . $e -> getMessage());
+            Logger::loggEvent("PDOException: " . $e -> getMessage());
         }
 
         if ($pdo->lastInsertId()) {

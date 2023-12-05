@@ -22,8 +22,7 @@
             #Sjekker om sql statement er skrevet korrekt
             $sp -> execute();
         } catch (PDOException $e){
-            echo "En feil oppstod";
-            error_log($e);
+            Logger::loggEvent("PDOException: " . $e -> getMessage());
         }
 
         $user = $sp -> fetch(PDO::FETCH_OBJ);
@@ -57,7 +56,7 @@
         $registrationResult = User::registerUser($user);
     
         if ($registrationResult) {
-            $_SESSION['registerMsg'] = "Du har registrert deg!"; // Save a success message in the session
+            $_SESSION['registerMsg'] = "Du har registrert deg!"; // Melding som sier at registrering var vellyket
             header("Location: ../index.php");
             exit();
         } else {

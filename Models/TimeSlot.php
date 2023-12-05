@@ -1,6 +1,7 @@
 <?php 
 require(__DIR__ . '/../tools/dbcon.php');
 require(__DIR__ . '/../tools/Validate.php');
+require(__DIR__ . '/../tools/Logger.php');
 
 
 class TimeSlot{
@@ -34,8 +35,7 @@ class TimeSlot{
             #Sjekker om sql statement er skrevet korrekt
             $query -> execute();
         } catch (PDOException $e){
-            echo "En feil oppstod";
-            error_log("PDOException: " . $e -> getMessage());
+            Logger::loggEvent("PDOException: " . $e -> getMessage());
         }
     }
 
@@ -67,8 +67,7 @@ class TimeSlot{
             #Sjekker om sql statement er skrevet korrekt
             $query -> execute();
         } catch (PDOException $e){
-            echo "En feil oppstod";
-            error_log($e);
+            Logger::loggEvent("PDOException: " . $e -> getMessage());
         }
         $timeslots = array();
         #Så lenge den henter rows skal while løkken kjøre, stopper når det ikke er flere rows å hente
@@ -108,8 +107,7 @@ class TimeSlot{
             #Sjekker om sql statement er skrevet korrekt
             $query -> execute();
         } catch (PDOException $e){
-            echo "En feil oppstod";
-            error_log($e);
+            Logger::loggEvent("PDOException: " . $e -> getMessage());
         }
 
         $timeslot = $query -> fetch(PDO::FETCH_OBJ);
@@ -132,8 +130,7 @@ class TimeSlot{
             #Sjekker om sql statement er skrevet korrekt
             $query -> execute();
         } catch (PDOException $e){
-            echo "En feil oppstod";
-            error_log($e);
+            Logger::loggEvent("PDOException: " . $e -> getMessage());
         }
     }
 
@@ -151,8 +148,7 @@ class TimeSlot{
             #Sjekker om sql statement er skrevet korrekt
             $query -> execute();
         } catch (PDOException $e){
-            echo "En feil oppstod";
-            error_log($e);
+            Logger::loggEvent("PDOException: " . $e -> getMessage());
         }
     }
 
@@ -170,8 +166,7 @@ class TimeSlot{
             #Sjekker om sql statement er skrevet korrekt
             $query -> execute();
         } catch (PDOException $e){
-            echo "En feil oppstod";
-            error_log($e);
+            Logger::loggEvent("PDOException: " . $e -> getMessage());
         }
     }
     //Henter alle "slotsene" brukt til ledige/booket timer
@@ -204,8 +199,7 @@ class TimeSlot{
             $timeslots = $query->fetchAll(PDO::FETCH_OBJ);
             return $timeslots;
         } catch (PDOException $e) {
-            echo "En feil oppstod";
-            error_log($e);
+            Logger::loggEvent("PDOException: " . $e -> getMessage());
             return [];
             }
         }
