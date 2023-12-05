@@ -39,7 +39,7 @@
             header("Location: ../Views/timeSlot/calender.php");
             exit();
         } else {
-            echo "Feil brukernavn eller passord";
+            $_SESSION['loginError'] = "Feil brukernavn eller passord";
         }
         
     }

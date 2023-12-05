@@ -28,6 +28,10 @@
                 $registerMsg = $_SESSION["registerMsg"];
                 unset($_SESSION["registerMsg"]);
             }
+            if (isset($_SESSION["loginError"])) {
+                $loginError = $_SESSION["loginError"];
+                unset($_SESSION["loginError"]);
+            }
             ?>
             <form method="POST" class="p-4">
                 <div class="form-group">
@@ -53,6 +57,9 @@
             }
             if(isset($registerMsg)){
                 echo "<div class='alert alert-primary'>$registerMsg</div>";
+            }
+            if(isset($loginError)){
+                echo "<div class='alert alert-warning'>$loginError</div>";
             }
             ?>
         </div>
